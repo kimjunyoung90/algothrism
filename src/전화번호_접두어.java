@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  * https://school.programmers.co.kr/learn/courses/30/lessons/42577?language=java
  * 한 전화번호가 다른 전화번호의 접두어인지 확인하는 알고리즘
@@ -16,20 +18,21 @@ public class 전화번호_접두어 {
     }
 
     private static boolean solution(String[] phone_book) {
+        //1. 정렬
+        Arrays.sort(phone_book);
 
+        //문자열 정렬 시 문자열 순서대로 정렬, 짧은 문자가 먼저 정렬됨
+
+        //예외
+        //전화번호 목록이 1개인 경우는 접두어 미존재
         if(phone_book.length == 1) return true;
 
-        for (int i = 0; i < phone_book.length; i++) {
+        for (int i = 1; i < phone_book.length; i++) {
 
-            String prefix = phone_book[i];
+            String prefix = phone_book[i - 1];
+            String prefixCheckTarget = phone_book[i];
+            if(prefixCheckTarget.startsWith(prefix)) return false;
 
-            for (int j = 0; j < phone_book.length; j++) {
-
-                if(i == j) continue;
-                String prefixCheckTarget = phone_book[j];
-                if(prefixCheckTarget.indexOf(prefix) == 0) return false;
-
-            }
         }
 
         return true;

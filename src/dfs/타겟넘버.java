@@ -12,12 +12,13 @@ public class 타겟넘버 {
     }
 
     private void dfs(int[] numbers, int target, int depth, int sum) {
-        if(numbers.length == depth) {
+        if(depth == numbers.length) {
             if(sum == target) {
                 answer++;
             }
             return;
         }
+
         dfs(numbers, target, depth + 1, sum + numbers[depth]);
         dfs(numbers, target, depth + 1, sum - numbers[depth]);
     }
@@ -25,11 +26,9 @@ public class 타겟넘버 {
     public static void main(String[] args) {
 
         타겟넘버 targetNumber = new 타겟넘버();
-        int[] numbers = new int[]{4,1,2,1};
+        int[] numbers = new int[]{4, 1, 2, 1};
         int target = 4;
-        int depth = 0;
-        int sum = 0;
-        targetNumber.dfs(numbers, target, depth, sum);
+        targetNumber.dfs(numbers, target, 0, 0);
         System.out.println(targetNumber.answer);
     }
 }

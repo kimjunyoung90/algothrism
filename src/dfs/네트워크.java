@@ -1,7 +1,7 @@
 package dfs;
 
 /**
- * https://school.programmers.co.kr/learn/courses/30/lessons/43162?language=java
+ * @link https://school.programmers.co.kr/learn/courses/30/lessons/43162?language=java
  */
 public class 네트워크 {
     public int solution(int n, int[][] computers) {

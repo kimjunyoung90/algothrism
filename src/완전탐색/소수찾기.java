@@ -1,8 +1,6 @@
 package 완전탐색;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -11,24 +9,41 @@ import java.util.Set;
 
 public class 소수찾기 {
 
-    static Set<String> nubmerSet = new HashSet<>();
+    static Set<Integer> nubmerSet = new HashSet<>();
 
-    public static void main(String[] args) {
-        for (int i = 0; i < 1000000000; i++) {
-            System.out.println("고양이야 뛰어라");
+    public int solution(String numbers) {
+        boolean[] visited = new boolean[numbers.length()];
+        addNumberSet("", numbers, visited);
+        int numberOfPrime = 0;
+        for (int number : nubmerSet) {
+            if (isPrime(number)) numberOfPrime++;
         }
-//        addNumberSet("011", "");
+
+        return numberOfPrime;
     }
 
-    public static void addNumberSet(String numbers, String number) {
+    public static void main(String[] args) {
+        소수찾기 test = new 소수찾기();
+        System.out.println(test.solution("17"));
+    }
 
-        if (number.length() == numbers.length()) {
-            return;
-        };
+    public boolean isPrime(int number) {
+        if (number < 2) return false;
+        for (int i = 2; i <  number; i++) {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+
+    public void addNumberSet(String current, String numbers, boolean[] visited) {
         for (int i = 0; i < numbers.length(); i++) {
-            String newNumber = number + numbers.charAt(i);
-            nubmerSet.add(newNumber);
-            addNumberSet(numbers, newNumber);
+            if (!visited[i]) {
+                visited[i] = true;
+                String newNumber = current + numbers.charAt(i);
+                nubmerSet.add(Integer.parseInt(newNumber));
+                addNumberSet(newNumber, numbers, visited);
+                visited[i] = false;
+            }
         }
     }
 

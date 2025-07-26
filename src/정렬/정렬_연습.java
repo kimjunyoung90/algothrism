@@ -6,13 +6,16 @@ public class 정렬_연습 {
     public static void main(String[] args) {
         int[] numbers = {5, 3, 8, 1, 9, 2};
         //오름차순 정렬
+        //배열 정렬 시 Arrays.sort 사용한다.
         Arrays.sort(numbers);
         System.out.println(Arrays.toString(numbers));
 
         String[] names = {"banana", "apple", "orange", "grape"};
         //내림차순 정렬
+        //내림차순 정렬 시 Collections 사용한다.
         Arrays.sort(names, Collections.reverseOrder());
         System.out.println(Arrays.toString(names));
+
 
         //객체 정렬
         List<Student> students = new ArrayList<>(List.of(
@@ -21,10 +24,11 @@ public class 정렬_연습 {
                 new Student("Charlie", 85),
                 new Student("David", 75)
         ));
-        students.sort(Comparator.comparing((Student s) -> s.score).reversed()
-                .thenComparing(s -> s.name));
-        students.forEach(student -> System.out.println(student.name));
-
+        //List 정렬 시 Collections 사용한다.
+        //점수 기준 내림차순.. 이름 기준 오름차순
+        students.sort(Comparator.comparing(Student::getScore).reversed()
+                .thenComparing(Student::getName));
+        //Collections를 사용하려면 Comparable 인터페이스를 상속하고 있어야 한다.
         //다중 조건 정렬 후 TopN 추출
 
         List<Product> products = new ArrayList<>(List.of(
@@ -34,13 +38,9 @@ public class 정렬_연습 {
                 new Product("D", 2000, 5),
                 new Product("E", 6000, 4)
         ));
-
-        products.sort(Comparator.comparing(Product::getRating).reversed()
-                .thenComparing(Product::getPrice));
-
-        List<Product> top3 = products.subList(0, Math.min(3, products.size()));
-        top3.forEach(s -> System.out.println(s.name));
+        //Collections 를 사용하려면 대상이 내부적으로 Comparable를 구현하고 있어야 한다.
     }
+
     static class Student {
         String name;
         int score;
@@ -48,6 +48,14 @@ public class 정렬_연습 {
         public Student(String name, int score) {
             this.name = name;
             this.score = score;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public int getScore() {
+            return score;
         }
     }
 

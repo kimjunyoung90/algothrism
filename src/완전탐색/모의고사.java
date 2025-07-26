@@ -1,7 +1,5 @@
 package 완전탐색;
 
-import java.util.Arrays;
-
 /**
  * @link https://school.programmers.co.kr/learn/courses/30/lessons/42840
  */

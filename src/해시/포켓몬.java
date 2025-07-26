@@ -1,4 +1,4 @@
-package 완전탐색;
+package 해시;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @link
+ * @link https://school.programmers.co.kr/learn/courses/30/lessons/1845?language=java
  */
 public class 포켓몬 {
     public int solution(int[] nums) {
@@ -21,7 +21,7 @@ public class 포켓몬 {
 
     public static void main(String[] args) {
         포켓몬 test = new 포켓몬();
-        int[] nums = {3,3,3,2,2,2};
+        int[] nums = {3, 3, 3, 2, 2, 2};
         int result = test.solution(nums);
         System.out.println(result);
     }

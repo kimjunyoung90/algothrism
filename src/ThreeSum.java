@@ -12,19 +12,13 @@ class Solution {
         // 1. 요소가 중복되지 않는 3개의 숫자 조합을 찾음
         for (int i = 0; i < nums.length; i++) {
             for (int j = i + 1; j < nums.length; j++) {
+
+                //3번째 요소를 직접 찾는다.
+                int target = -(nums[i] + nums[j]);
                 for (int k = j + 1; k < nums.length; k++) {
-
-                    // 2. 숫자 조합의 합이 0인 조합을 찾음
-                    if (nums[i] + nums[j] + nums[k] == 0) {
-                        List<Integer> answer = new ArrayList<>();
-                        answer.add(nums[i]);
-                        answer.add(nums[j]);
-                        answer.add(nums[k]);
-
-                        answers.add(answer);
+                    if(nums[k] == target) {
+                        answers.add(Arrays.asList(nums[i], nums[j], nums[k]));
                     }
-
-
                 }
             }
         }

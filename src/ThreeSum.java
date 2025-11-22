@@ -6,6 +6,8 @@ import java.util.*;
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
         Set<List<Integer>> answers = new HashSet<>();
+        //숫자들을 미리 정렬해서 3번째 단계에서 추가적인 정렬을 없게 만들자..
+        Arrays.sort(nums);
 
         // 1. 요소가 중복되지 않는 3개의 숫자 조합을 찾음
         for (int i = 0; i < nums.length; i++) {
@@ -19,8 +21,6 @@ class Solution {
                         answer.add(nums[j]);
                         answer.add(nums[k]);
 
-                        //3. 이미 전에 발견한 조합인지 확인
-                        Collections.sort(answer);
                         answers.add(answer);
                     }
 

@@ -9,9 +9,8 @@ class Solution {
 
         // 1. 요소가 중복되지 않는 3개의 숫자 조합을 찾음
         for (int i = 0; i < nums.length; i++) {
-            for (int j = 0; j < nums.length; j++) {
-                for (int k = 0; k < nums.length; k++) {
-                    if (i == j || j == k || k == i) continue;
+            for (int j = i + 1; j < nums.length; j++) {
+                for (int k = j + 1; k < nums.length; k++) {
 
                     // 2. 숫자 조합의 합이 0인 조합을 찾음
                     if (nums[i] + nums[j] + nums[k] == 0) {

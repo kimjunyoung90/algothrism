@@ -1,26 +1,28 @@
 import java.util.Arrays;
 
 public class CoinChange {
+    //풀이 원리 = 특정 금액을 만들 때 최소 동전 수는 몇 개?
+    //예) 0원은 동전 0개
+    // 1원은 동전 1개
+    // 2원은 동전 1
     public int coinChange(int[] coins, int amount) {
-        //최소 코인 사용 수
+        //불가능한 값
+        int max = amount + 1;
+        int[] dp = new int[amount + 1];
+        //최소 동전 수를 모두 불가능한 값으로 설정
+        Arrays.fill(dp, max);
+        dp[0] = 0;
 
-        //= 최대 금액의 코인을 최대한 사용
-        Arrays.sort(coins);
-
-        search(coins.length - 1, amount, coins);
-
-        return -1;
-    }
-
-    //아이디어 = 가격이 제일 높은 동전을 선택하고 동전 금액 만큼 차감액을 차감한다.
-    public boolean search(int target, int amount, int[] coins) {
-        if (amount == 0) return true;
-        if (amount < 0) return false;
-        if (amount < coins[target]) {
-            return search(target - 1, amount, coins);
-        } else {
-            amount -= coins[target];
-            return search(target, amount, coins);
+        //금액 1원 부터 계산
+        for (int i = 1; i <= amount; i++) {
+            //사용할 수 있는 동전을 꺼냄
+            for(int coin: coins) {
+                if (coin <= i) {
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
         }
+
+        return dp[amount] > amount ? -1 : dp[amount];
     }
 }

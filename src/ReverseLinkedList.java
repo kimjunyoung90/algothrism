@@ -10,7 +10,7 @@ public class ReverseLinkedList {
         ListNode nextNode = head;
         while (nextNode != null) {
             stack.push(nextNode);
-            nextNode = head.next;
+            nextNode = nextNode.next;
         }
 
         //stack 에서 꺼내서 거꾸로
@@ -21,6 +21,7 @@ public class ReverseLinkedList {
             startNode.next = popped;
             startNode = popped;
         }
+        startNode.next = null;
 
         return preNode.next;
     }

@@ -1,3 +1,6 @@
+/**
+ * @link https://github.com/DaleStudy/leetcode-study/issues/244
+ */
 public class LongestRepeatingCharacterReplacement {
     public int characterReplacement(String s, int k) {
         //window에 있는 각 문자의 개수

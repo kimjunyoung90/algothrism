@@ -17,6 +17,7 @@ public class ValidParentheses {
                 stack.push(c);
             } else {
 
+                //닫기 여러번
                 if (stack.isEmpty()) return false;
 
                 char open = stack.pop();

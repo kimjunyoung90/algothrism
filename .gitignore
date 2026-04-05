@@ -65,3 +65,6 @@ Desktop.ini
 *~
 *.swp
 *.swo
+
+# Local settings
+settings.local.json

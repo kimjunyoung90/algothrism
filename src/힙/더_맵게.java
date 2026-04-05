@@ -1,5 +1,6 @@
 package 힙;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
@@ -9,9 +10,7 @@ public class 더_맵게 {
     public int solution(int[] scoville, int K) {
         // TODO(human): PriorityQueue를 활용하여 구현하세요.
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        for (int sc : scoville) {
-            pq.add(sc);
-        }
+        pq.addAll(Arrays.stream(scoville).boxed().toList());
 
         int shuffle = 0;
         while(pq.peek() < K) {

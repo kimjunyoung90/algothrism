@@ -14,6 +14,7 @@ allowed-tools: WebFetch Read Write Bash Glob Grep
 1. **문제 페이지 가져오기**: WebFetch로 문제 URL에서 다음 정보를 추출한다:
    - 문제 이름
    - 문제 분류/카테고리 (해시, 스택/큐, 힙, 정렬, 완전탐색, 탐욕, 동적계획법, DFS/BFS, 이진탐색, 그래프 등)
+   - 문제 설명 (무엇을 구하는 문제인지, 제약조건)
    - 함수 시그니처 (메서드명, 파라미터, 리턴 타입)
    - 예제 입출력
 
@@ -30,6 +31,13 @@ allowed-tools: WebFetch Read Write Bash Glob Grep
 package 패키지명; // src/ 루트에 생성할 경우 생략
 
 /**
+ * 문제_이름
+ *
+ * 문제 설명 (무엇을 구하는 문제인지 간결하게)
+ *
+ * 제약조건:
+ * - 제약조건들
+ *
  * @link 문제_URL
  */
 public class 클래스명 {

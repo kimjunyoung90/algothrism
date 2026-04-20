@@ -1,45 +1,51 @@
 package bfs;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * @link https://school.programmers.co.kr/learn/courses/30/lessons/43163?language=java
+ * 단어_변환
+ *
+ * begin에서 target으로 변환하는 최소 단계 수를 구하는 문제.
+ * 한 번에 한 개의 알파벳만 바꿀 수 있고, words에 속한 단어로만 변환 가능.
+ *
+ * 제약조건:
+ * - 모든 단어는 소문자 알파벳으로만 구성
+ * - 단어 길이: 3~10자, 모든 단어 동일 길이
+ * - words 크기: 3~50개, 중복 없음
+ * - begin과 target은 서로 다름
+ * - 변환 불가능 시 0 반환
+ *
+ * @link https://school.programmers.co.kr/learn/courses/30/lessons/43163
  */
 public class 단어변환 {
 
-    class WordNode {
+    class Node {
         String word;
         int depth;
 
-        WordNode(String word, int depth) {
+        public Node(String word, int depth) {
             this.word = word;
             this.depth = depth;
         }
     }
 
     public int solution(String begin, String target, String[] words) {
+        // TODO(human): 구현하세요.
+        //hit -> cog
+        //한 번에 한개의 알파벳만 변경 가능
+        Queue<Node> q = new LinkedList<>();
+        q.offer(new Node(begin, 0));
 
-        //target이 words에 없다면 변환 불가
-        if(!Arrays.asList(words).contains(target)) return 0;
-
-        Queue<WordNode> queue = new LinkedList<>();
         boolean[] visited = new boolean[words.length];
 
-        queue.offer(new WordNode(begin, 0));
-
-        while(!queue.isEmpty()) {
-            WordNode current = queue.poll();
-
-            //target 도달 시 종료
-            if(current.word.equals(target)) return current.depth;
-
-            //변환 가능한 다음 단어 탐색
-            for(int i = 0; i < words.length; i++) {
-                if(!visited[i] && isOneCharDiff(current.word, words[i])) {
+        while (!q.isEmpty()) {
+            Node curr = q.poll();
+            if(curr.word.equals(target)) return curr.depth;
+            for (int i = 0; i < words.length; i++) {
+                if(!visited[i] && isOneCharDiff(curr.word, words[i])) {
                     visited[i] = true;
-                    queue.offer(new WordNode(words[i], current.depth + 1));
+                    q.offer(new Node(words[i], curr.depth + 1));
                 }
             }
         }
@@ -47,24 +53,29 @@ public class 단어변환 {
         return 0;
     }
 
-    private boolean isOneCharDiff(String a, String b) {
+    public boolean isOneCharDiff(String a, String b) {
         int diff = 0;
         for (int i = 0; i < a.length(); i++) {
             if(a.charAt(i) != b.charAt(i)) {
                 diff++;
-            }
-            if(diff > 1) {
-                return false;
             }
         }
         return diff == 1;
     }
 
     public static void main(String[] args) {
-        String begin = "hit";
-        String target = "cog";
-        String[] words = { "hot", "dot", "dog", "lot", "log", "cog" };
         단어변환 test = new 단어변환();
-        System.out.println(test.solution(begin, target, words));
+
+        // 예제 1: 기대값 4
+        String begin1 = "hit";
+        String target1 = "cog";
+        String[] words1 = {"hot", "dot", "dog", "lot", "log", "cog"};
+        System.out.println(test.solution(begin1, target1, words1));
+
+        // 예제 2: 기대값 0
+        String begin2 = "hit";
+        String target2 = "cog";
+        String[] words2 = {"hot", "dot", "dog", "lot", "log"};
+        System.out.println(test.solution(begin2, target2, words2));
     }
 }

@@ -1,7 +1,10 @@
 package bfs;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 /**
  * 단어_변환
@@ -31,36 +34,29 @@ public class 단어변환 {
     }
 
     public int solution(String begin, String target, String[] words) {
-        // TODO(human): 구현하세요.
-        //hit -> cog
-        //한 번에 한개의 알파벳만 변경 가능
+        Set<String> wordSet = new HashSet<>(Arrays.asList(words));
+        if (!wordSet.contains(target)) return 0;
+
+        Set<String> visited = new HashSet<>();
         Queue<Node> q = new LinkedList<>();
         q.offer(new Node(begin, 0));
-
-        boolean[] visited = new boolean[words.length];
+        visited.add(begin);
 
         while (!q.isEmpty()) {
             Node curr = q.poll();
-            if(curr.word.equals(target)) return curr.depth;
-            for (int i = 0; i < words.length; i++) {
-                if(!visited[i] && isOneCharDiff(curr.word, words[i])) {
-                    visited[i] = true;
-                    q.offer(new Node(words[i], curr.depth + 1));
-                }
+            if (curr.word.equals(target)) return curr.depth;
+
+            // 현재 단어의 각 위치에 a~z를 대입해 '한 글자 다른' 이웃 후보를 만든다.
+            // 후보가 wordSet에 존재하고 아직 방문 전이면 큐에 추가.
+            char[] chars = curr.word.toCharArray();
+            for (int i = 0; i < chars.length; i++) {
+                char original = chars[i];
+                // TODO(human): a~z로 치환하면서 이웃 탐색
+                chars[i] = original;
             }
         }
 
         return 0;
-    }
-
-    public boolean isOneCharDiff(String a, String b) {
-        int diff = 0;
-        for (int i = 0; i < a.length(); i++) {
-            if(a.charAt(i) != b.charAt(i)) {
-                diff++;
-            }
-        }
-        return diff == 1;
     }
 
     public static void main(String[] args) {

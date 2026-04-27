@@ -17,47 +17,47 @@ import java.util.Queue;
  * @link https://www.hackerrank.com/challenges/connected-cell-in-a-grid/problem
  */
 public class 연결된_셀 {
+	int count;
+
 	public int connectedCell(int[][] matrix) {
 		// TODO(human): 구현하세요.
 		// 값이 1인 것만 채워진 cell이다.
 		// 수평, 수직, 대각선인 경우에만 연결되어 있다.
 		// 가장 큰 면적을 구하라.
-		// 하나의 cell을 지정하고 연결이 끊길 때까지 면적을 구해본다.
-		// 대각선은 어떻게 할건가?
-		int[] dx = {0, 0, -1, 1, -1, 1, -1, 1};
-		int[] dy = {1, -1, 0, 0, 1, 1, -1, -1};
+		// 하나의 cell을 지정하고 갈 수 있는 곳으로 가본다.
+		// 그리고, 연결이 끊길 때까지 면적을 구해본다.
+		// 연결이 끊기면 제자리로 돌아와서 갈 수 있는데로 다시 끝까지 가본다.
 
 		//면적 구하기
 		int maxArea = 0;
 		for (int c = 0; c < matrix[0].length; c++) {
 			for (int r = 0; r < matrix.length; r++) {
-				Queue<int[]> q = new LinkedList<>();
 				if (matrix[r][c] == 1) {
-					matrix[r][c] = 0;
-					q.offer(new int[]{r, c});
+					count = 0;
+					dfs(matrix, r, c);
+					maxArea = Math.max(count, maxArea);
 				}
-				int maxtemp = 0;
-				while (!q.isEmpty()) {
-					//갈 수 있는 경로만 방문
-					int[] curr = q.poll();
-					//maxArea 추가
-					maxtemp += 1;
-					//인접 섬 방문
-					for (int i = 0; i < 8; i++) {
-						int nextY = curr[0] + dy[i];
-						int nextX = curr[1] + dx[i];
-						//방문 최적화
-						if (nextX >= 0 && nextY >= 0 && nextX < matrix[0].length && nextY < matrix.length && matrix[nextY][nextX] == 1) {
-							//방문 표시
-							matrix[nextY][nextX] = 0;
-							q.offer(new int[]{nextY, nextX});
-						}
-					}
-				}
-				maxArea = Math.max(maxtemp, maxArea);
 			}
 		}
 		return maxArea;
+	}
+
+	private void dfs(int[][] matrix, int r, int c) {
+		if (r < 0 || c < 0 || r >= matrix.length || c >= matrix[0].length) return;
+		if (matrix[r][c] == 0) return;
+
+		//방문 표기
+		matrix[r][c] = 0;
+
+		//면적 증가
+		count++;
+
+		// 3. 8방향 이웃에게도 같은 일 시키기
+		int[] dx = {0, 0, -1, 1, -1, 1, -1, 1};
+		int[] dy = {1, -1, 0, 0, 1, 1, -1, -1};
+		for (int i = 0; i < 8; i++) {
+			dfs(matrix, r + dy[i], c + dx[i]);
+		}
 	}
 
 	public static void main(String[] args) {

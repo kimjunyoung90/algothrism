@@ -53,7 +53,6 @@ public class 연결된_셀 {
 							q.offer(new int[]{nextY, nextX});
 						}
 					}
-
 				}
 				maxArea = Math.max(maxtemp, maxArea);
 			}

@@ -21,43 +21,39 @@ public class 최단_도달_거리 {
 		// TODO(human): 구현하세요.
 		//노드 s로 부터 나머지 모든 노드까지의 최단 거리를 노드 번호 순서대로 반환
 		//도달할 수 없으면 -1
+
+		//s 부터 탐색을 시작해서 주변 노드를 한 단계씩 증가하며 탐색하면 결과값이 나오지 않을까??
 		int[] distance = new int[n + 1];
 		Arrays.fill(distance, -1);
 
-		//s 노드로 부터 시작해서 연결된 모든 노드 찾기...?
-		List<List<Integer>> graph = new ArrayList<>();
-		for (int i = 0; i < n + 1; i++) {
-			graph.add(new ArrayList<>());
+		List<List<Integer>> adj = new ArrayList<>();
+		for (int i = 0; i <= n; i++) {
+			adj.add(i, new ArrayList<>());
 		}
 
 		for (int i = 0; i < m; i++) {
-			int start = edges[i][0];
-			int end = edges[i][1];
-			graph.get(start).add(end);
-			graph.get(end).add(start);
+			adj.get(edges[i][0]).add(edges[i][1]);
+			adj.get(edges[i][1]).add(edges[i][0]);
 		}
 
 		Queue<Integer> q = new LinkedList<>();
-		distance[s] = 0;
 		q.offer(s);
-
+		distance[s] = 0;
 		while (!q.isEmpty()) {
 			int cur = q.poll();
-			for (int next : graph.get(cur)) {
-				if(distance[next] == -1) {
-					distance[next] = distance[cur] + 1;
-					q.offer(next);
+			for (int a : adj.get(cur)) {
+				if(distance[a] == -1) {
+					distance[a] = distance[cur] + 1;
+					q.offer(a);
 				}
 			}
 		}
-
 		int[] result = new int[n - 1];
 		int idx = 0;
 		for (int i = 1; i <= n; i++) {
-			if(i == s) continue;//시작 노드 건너뛰기
+			if(i == s) continue;
 			result[idx++] = distance[i] == -1 ? -1 : distance[i] * 6;
 		}
-
 		return result;
 	}
 

@@ -24,45 +24,48 @@ import java.util.Queue;
 public class 강의_일정 {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // TODO(human): 구현하세요.
-        // 필수 수강 강의 목록이 존재(numCourses)
-        // 필수 강의를 듣기 위해서 먼저 들어야 하는 강의 목록이 존재함(prerequisites)
 
-        //강의를 듣기 위해서는 먼저 들어야 하는 강의가 있는지 체크하는 것이 주요 관점이다.
-        //먼저 들어야 하는 강의가 없는 경우에만 강의를 들을 수 있다.
+        int[] remainingPreClasses = new int[numCourses];
 
-        //선제적으로 들어야 하는 강의의 수
-        int[] inDegree = new int[numCourses];
-        List<List<Integer>> nextCourses = new ArrayList<>();
+        //b라는 강의를 듣고 나서 들을 수 있는 강의를 확인
+        List<List<Integer>> nextClasses = new ArrayList<>();
         for (int i = 0; i < numCourses; i++) {
-            nextCourses.add(new ArrayList<>());
+            nextClasses.add(new ArrayList<>());
         }
         for (int i = 0; i < prerequisites.length; i++) {
-            int after = prerequisites[i][0];
+            int next = prerequisites[i][0];
             int pre = prerequisites[i][1];
-            inDegree[after]++;
-            nextCourses.get(pre).add(after);
+            nextClasses.get(pre).add(next);
+            //next을 듣기 위해서는 pre를 들어야함
+            remainingPreClasses[next]++;
         }
 
-        Queue<Integer> taking = new LinkedList<>();
-        for (int i = 0; i < inDegree.length; i++) {
-            if(inDegree[i] == 0) {
-                taking.offer(i);
+        Queue<Integer> ready = new LinkedList<>();
+        //먼저 들어야 하는 강의가 없는 것부터 듣기 -> 강의별 먼저 들어야 하는 강의가 몇개인지 세둠 = 위에 remainingPreClasses
+        for (int i = 0; i < numCourses; i++) {
+            if(remainingPreClasses[i] == 0) {
+                ready.offer(i);
             }
         }
+        //들은 강의는 중복 수강 방지(최적화)
+        int finished = 0;
+        while (!ready.isEmpty()) {
+            int taken = ready.poll();
+            // 강의 수강 시 들은 강의 remainingPreClasses 추가
+            finished++;
+            //이 강의를 수강했을 때 들을 수 있는 강의 확인
+            for (int nextClass : nextClasses.get(taken)) {
+                //들을 강의가 있던 강의들은 remainingPreClasses 감소 = a라는 강의를 먼저 들어야 하는 강의의 remainingPreClasses 감소
+                remainingPreClasses[nextClass]--;
 
-        int taken = 0;
-        while (!taking.isEmpty()) {
-            int cur = taking.poll();
-            taken++;
-            for(int nextCourse : nextCourses.get(cur)) {
-                inDegree[nextCourse]--;
-                if(inDegree[nextCourse] == 0) {
-                    taking.offer(nextCourse);
+                //선수 강의 없으면 수강
+                if(remainingPreClasses[nextClass] == 0) {
+                    ready.offer(nextClass);
                 }
             }
         }
 
-        return taken == numCourses;
+        return finished == numCourses;
     }
 
     public static void main(String[] args) {

@@ -24,18 +24,17 @@ import java.util.Queue;
  */
 public class 썩은_오렌지 {
 	public int orangesRotting(int[][] grid) {
-		int total = 0;
-		int suckedCount = 0;
+
+		int fresh = 0;
 		Queue<int[]> sucked = new LinkedList<>();
 
 		for (int r = 0; r < grid.length; r++) {
 			for (int c = 0; c < grid[0].length; c++) {
-				if (grid[r][c] == 1 || grid[r][c] == 2) {
-					total++;
+				if (grid[r][c] == 1) {
+					fresh++;
 				}
 				if (grid[r][c] == 2) {
 					sucked.offer(new int[]{r, c});
-					suckedCount++;
 				}
 			}
 		}
@@ -44,10 +43,10 @@ public class 썩은_오렌지 {
 		int[] dc = {0, 0, -1, 1};
 
 		int time = 0;
-		boolean next;
-		do {
-			next = false;
+		int freshed = 0;
+		while (!sucked.isEmpty()) {
 			int size = sucked.size();
+			boolean next = false;
 			for (int i = 0; i < size; i++) {
 				int[] cur = sucked.poll();
 				int cr = cur[0];
@@ -62,15 +61,15 @@ public class 썩은_오렌지 {
 					if (grid[nr][nc] == 1) {
 						sucked.offer(new int[]{nr, nc});
 						grid[nr][nc] = 2;
+						freshed++;
 						next = true;
-						suckedCount++;
 					}
 				}
 			}
 			if (next) time++;
-		} while (next);
+		}
 
-		return total == suckedCount ? time : -1;
+		return fresh == freshed ? time : -1;
 	}
 
 	public static void main(String[] args) {

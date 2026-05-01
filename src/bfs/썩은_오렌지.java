@@ -1,5 +1,8 @@
 package bfs;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * 썩은_오렌지 (Rotting Oranges)
  * <p>
@@ -21,8 +24,53 @@ package bfs;
  */
 public class 썩은_오렌지 {
 	public int orangesRotting(int[][] grid) {
-		// TODO(human): 구현하세요.
-		return 0;
+		int total = 0;
+		int suckedCount = 0;
+		Queue<int[]> sucked = new LinkedList<>();
+
+		for (int r = 0; r < grid.length; r++) {
+			for (int c = 0; c < grid[0].length; c++) {
+				if (grid[r][c] == 1 || grid[r][c] == 2) {
+					total++;
+				}
+				if (grid[r][c] == 2) {
+					sucked.offer(new int[]{r, c});
+					suckedCount++;
+				}
+			}
+		}
+
+		int[] dr = {1, -1, 0, 0};
+		int[] dc = {0, 0, -1, 1};
+
+		int time = 0;
+		boolean next;
+		do {
+			next = false;
+			int size = sucked.size();
+			for (int i = 0; i < size; i++) {
+				int[] cur = sucked.poll();
+				int cr = cur[0];
+				int cc = cur[1];
+
+				for (int j = 0; j < 4; j++) {
+					int nr = cr + dr[j];
+					int nc = cc + dc[j];
+
+					if (nr < 0 || nc < 0 || nr >= grid.length || nc >= grid[0].length) continue;
+
+					if (grid[nr][nc] == 1) {
+						sucked.offer(new int[]{nr, nc});
+						grid[nr][nc] = 2;
+						next = true;
+						suckedCount++;
+					}
+				}
+			}
+			if (next) time++;
+		} while (next);
+
+		return total == suckedCount ? time : -1;
 	}
 
 	public static void main(String[] args) {

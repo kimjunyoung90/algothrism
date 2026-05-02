@@ -17,15 +17,13 @@ import java.util.*;
  */
 public class 도로와_도서관 {
 	public static long roadsAndLibraries(int n, int c_lib, int c_road, List<List<Integer>> cities) {
-		//2. 아니면 시뮬레이션
-		//도시를 연결이 가능한 도로를 모두 건설했을 때도서관을 지을 수 있는 최저 비용은 무엇인가?
-		//도로를 하나씩 끊어가며 도서관을 짓는 것과 비교했을 때 최저 비용은 무엇인가?
 
-		//연결된 도시들 확인하기
-		//1번 도시랑 연결된 도시들 넣기
-		//1번 도시랑 연결된 도시와 연결된 도시들 넣기
-		// 그다음 안넣은 도시 넣기
-		//도시는 1 부터
+		//도서관 건설 최저 비용은
+		//연결가능한 도시끼리 연결하고 + 도서관 1개 짓기
+		//연결하지 않고 도시마다 도서관 짓기
+		//둘 중 하나
+
+		//연결가능한 도시들 확인하기
 		List<List<Integer>> adj = new ArrayList<>();
 		for (int i = 0; i <= n; i++) {
 			adj.add(new ArrayList<>());
@@ -59,7 +57,6 @@ public class 도로와_도서관 {
 			}
 		}
 
-		// TODO(human): 그룹별로 도로 vs 도서관 비용 비교해서 합산
 		long total = 0L;
 		for(List<Integer> group : groups) {
 			long planA = (group.size() - 1) * c_road + c_lib;
@@ -70,13 +67,57 @@ public class 도로와_도서관 {
 		return total;
 	}
 
+	// === Union-Find 풀이 ===
+	private static int[] parent;
+	private static int[] groupSize;
+
+	public static long roadsAndLibrariesUF(int n, int c_lib, int c_road, List<List<Integer>> cities) {
+		if(c_road >= c_lib) return (long) n * c_lib;
+
+		parent = new int[n + 1];
+		groupSize = new int[n + 1];
+
+		for (int i = 1; i <= n; i++) {
+			parent[i] = i;
+			groupSize[i] = 1;
+		}
+
+		for (List<Integer> road : cities) {
+			union(road.get(0), road.get(1));
+		}
+
+		long total = 0L;
+		for (int i = 1; i <= n; i++) {
+			if(find(i) == i) {
+				total += c_lib + (long) (groupSize[i] - 1) * c_road;
+			}
+		}
+		return total;
+	}
+
+	private static void union(int a, int b) {
+		int ra = find(a);
+		int rb = find(b);
+
+		if(ra == rb) return;
+
+		parent[rb] = ra;
+		groupSize[ra] += groupSize[rb];
+	}
+
+	private static int find(int x) {
+		if(parent[x] == x) return x;
+		return find(parent[x]);
+	}
+
 	public static void main(String[] args) {
 		// 예제 1: n=3, c_lib=2, c_road=1, roads=[[1,2],[3,1],[2,3]] → 기대값: 4
 		List<List<Integer>> cities1 = new ArrayList<>();
 		cities1.add(Arrays.asList(1, 2));
 		cities1.add(Arrays.asList(3, 1));
 		cities1.add(Arrays.asList(2, 3));
-		System.out.println(roadsAndLibraries(3, 2, 1, cities1)); // 기대값: 4
+		System.out.println("BFS: " + roadsAndLibraries(3, 2, 1, cities1));
+		System.out.println("UF : " + roadsAndLibrariesUF(3, 2, 1, cities1)); // 기대값: 4
 
 		// 예제 2: n=6, c_lib=2, c_road=5, roads=[[1,3],[3,4],[2,4],[1,2],[2,3],[5,6]] → 기대값: 12
 		List<List<Integer>> cities2 = new ArrayList<>();
@@ -86,6 +127,7 @@ public class 도로와_도서관 {
 		cities2.add(Arrays.asList(1, 2));
 		cities2.add(Arrays.asList(2, 3));
 		cities2.add(Arrays.asList(5, 6));
-		System.out.println(roadsAndLibraries(6, 2, 5, cities2)); // 기대값: 12
+		System.out.println("BFS: " + roadsAndLibraries(6, 2, 5, cities2));
+		System.out.println("UF : " + roadsAndLibrariesUF(6, 2, 5, cities2)); // 기대값: 12
 	}
 }

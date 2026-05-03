@@ -18,22 +18,35 @@ public class 달로_가는_여행 {
 	private static int[][] group;
 
 	public long journeyToMoon(int n, List<List<Integer>> astronaut) {
-		//1. 같은 그룹으로 묶기
-		//0 = root 번호, 1 = size;
-		group = new int[n][2];
-		Arrays.setAll(group, i -> new int[]{i, 1});
-
-		for (List<Integer> as : astronaut) {
-			union(as.get(0), as.get(1));
+		List<List<Integer>> adj = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			adj.add(new ArrayList<>());
 		}
 
+		for (List<Integer> as : astronaut) {
+			adj.get(as.get(0)).add(as.get(1));
+			adj.get(as.get(1)).add(as.get(0));
+		}
+		boolean[] visited = new boolean[n];
 		long answer = 0L;
-		long sumSoFar = 0L;
-		for (int i = 0; i < group.length; i++) {
-			if(find(i) == i) {
-				answer += sumSoFar * group[i][1];
-				sumSoFar += group[i][1];
+		int remaining = n;
+		for (int i = 0; i < n; i++) {
+			if (visited[i]) continue;
+			Queue<Integer> q = new LinkedList<>();
+			q.offer(i);
+			visited[i] = true;
+			long size = 0;
+			while (!q.isEmpty()) {
+				int cur = q.poll();
+				size++;
+				for (int next : adj.get(cur)) {
+					if (visited[next]) continue;
+					q.offer(next);
+					visited[next] = true;
+				}
 			}
+			remaining -= size;
+			answer += size * remaining;
 		}
 
 		return answer;

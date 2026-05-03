@@ -48,8 +48,11 @@ public class 달로_가는_여행 {
 	}
 
 	private int find(int x) {
-		if(group[x][0] == x) return x;
-		return find(group[x][0]);
+		if (group[x][0] == x) return x;
+		// TODO(human): 경로 압축 적용
+		// 재귀로 루트를 찾는데, 매번 탐색할 때 마다 동일한 경로를 또 탐색
+		// 바로 상위에 누가 있는지 궁금한게 아니기 때문에 항상 최상위 루트로 값을 갱신해둠
+		return group[x][0] = find(group[x][0]);
 	}
 
 	public static void main(String[] args) {

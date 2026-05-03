@@ -32,7 +32,7 @@ public class 달로_가는_여행 {
 		int remaining = n;
 		for (int i = 0; i < n; i++) {
 			if (visited[i]) continue;
-			Queue<Integer> q = new LinkedList<>();
+			Deque<Integer> q = new ArrayDeque<>();
 			q.offer(i);
 			visited[i] = true;
 			long size = 0;

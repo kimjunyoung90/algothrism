@@ -17,34 +17,32 @@ import java.util.*;
  * @link https://school.programmers.co.kr/learn/courses/30/lessons/42898
  */
 public class 등굣길 {
+	private static final int MOD = 1_000_000_007;
+
 	public int solution(int m, int n, int[][] puddles) {
 		// TODO(human): 구현하세요.
-		//우측/아래를 반복하면서 좌표를 돌면서 해당 좌표에 도달하면 이전 좌표에 도달할 수 있는 경우의 수를 해당 좌표에 더한다.
-		int[][] map = new int[m][n];
+
+		int[][] map = new int[n + 1][m + 1];
 
 		for (int[] p : puddles) {
-			int r = p[0];
-			int c = p[1];
-			map[r - 1][c - 1] = -1;
+			int r = p[1];
+			int c = p[0];
+			map[r][c] = -1;
 		}
-		//위, 좌 값 가져오기
-		//시작점
-		map[0][0] = 1;
-		for (int r = 0; r < m; r++) {
-			for (int c = 0; c < n; c++) {
-				if(map[r][c] == -1) continue;
-				//좌측 좌표 값 가져오기
-				int vpc = c - 1 < 0 ? 0 : map[r][c - 1];
-				if(vpc != -1) map[r][c] += vpc;
-				//위 좌표 값 가져오기
-				int vpr = r - 1 < 0 ? 0 : map[r - 1][c];
-				if(vpr != -1) map[r][c] += vpr;
+
+		map[0][1] = 1;
+		for (int r = 1; r <= n; r++) {
+			for (int c = 1; c <= m; c++) {
+				if(map[r][c] == -1) {
+					map[r][c] = 0;
+					continue;
+				}
+
+				map[r][c] = (map[r][c - 1] + map[r - 1][c]) % MOD;
 			}
 		}
 
-		//우로 탐색
-		//하로 탐색
-		return 0;
+		return map[n][m];
 	}
 
 	public static void main(String[] args) {

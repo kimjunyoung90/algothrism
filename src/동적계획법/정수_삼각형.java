@@ -19,17 +19,18 @@ import java.util.List;
 public class 정수_삼각형 {
 	public int solution(int[][] triangle) {
 		// TODO(human): 구현하세요.
-		//r, c
-		//(r + 1, c), (r + 1, c + 1)
-		int[][] dp = new int[triangle.length][triangle.length];
-		dp[0][0] = triangle[0][0];
-		sum(0, 0, dp, triangle);
-
-		int answer = 0;
-		for (int i = 0; i < dp.length; i++) {
-			answer = Math.max(dp[dp.length - 1][i], answer);
+		for (int r = 1; r < triangle.length; r++) {
+			for (int c = 0; c <= r ; c++) {
+				int left = c > 0 ? triangle[r - 1][c -1] : 0;
+				int right = c < r ? triangle[r - 1][c] : 0;
+				triangle[r][c] += Math.max(left, right);
+			}
 		}
-		return answer;
+		int max = 0;
+		for (int v : triangle[triangle.length - 1]) {
+			max = Math.max(max, v);
+		}
+		return max;
 	}
 
 	private void sum(int r, int c, int[][] dp, int[][] origin) {

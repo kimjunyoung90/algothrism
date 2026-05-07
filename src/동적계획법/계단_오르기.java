@@ -14,25 +14,15 @@ package 동적계획법;
 public class 계단_오르기 {
     private static int answer = 0;
     public int climbStairs(int n) {
-        // TODO(human): 구현하세요.
-        //n계의 계단
-        //시작점 = 0;
-        //1칸
-        //2칸
-        //1칸
-        //2칸
-        //1칸
-        //2칸
-        step(0, n);
-        return answer;
+        return step(0, n);
     }
-    private void step (int start, int end) {
+    private int step (int start, int end) {
         if(start == end) {
-            answer++;
-            return;
+            return 1;
         }
-        step(start + 1, end);
-        if(end - start >= 2) step(start + 2, end);
+        int oneStep = step(start + 1, end);
+        int twoStep = end - start >= 2 ?  step(start + 2, end) : 0;
+        return oneStep + twoStep;
     }
 
     public static void main(String[] args) {

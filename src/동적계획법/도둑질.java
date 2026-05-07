@@ -14,7 +14,6 @@ package 동적계획법;
  */
 public class 도둑질 {
 	public int solution(int[] money) {
-		// TODO(human): 구현하세요.
 		int caseA = rob(money, 0, money.length - 2);
 		int caseB = rob(money, 1, money.length - 1);
 		return Math.max(caseA, caseB);
@@ -24,7 +23,6 @@ public class 도둑질 {
 		int[] dp = new int[money.length];
 		dp[start] = money[start];
 		dp[start + 1] = Math.max(money[start], money[start + 1]);
-
 		for (int i = start + 2; i <= end; i++) {
 			dp[i] = Math.max(money[i] + dp[i - 2], dp[i - 1]);
 		}

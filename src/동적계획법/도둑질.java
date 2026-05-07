@@ -1,8 +1,5 @@
 package 동적계획법;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
-
 /**
  * 도둑질
  * <p>
@@ -16,24 +13,28 @@ import java.util.Arrays;
  * @link https://school.programmers.co.kr/learn/courses/30/lessons/42897
  */
 public class 도둑질 {
-    public int solution(int[] money) {
-        // TODO(human): 구현하세요.
-        //1, 2, 3, 1
-        int[] dp = new int[money.length];
-        dp[0] = money[0];
-        dp[1] = Math.max(money[0], money[1]);
+	public int solution(int[] money) {
+		// TODO(human): 구현하세요.
+		int caseA = rob(money, 0, money.length - 2);
+		int caseB = rob(money, 1, money.length - 1);
+		return Math.max(caseA, caseB);
+	}
 
-        for (int i = 2; i < money.length; i++) {
-            dp[i] = Math.max(money[i] + dp[i - 2], dp[i - 1]);
-        }
+	private int rob(int[] money, int start, int end) {
+		int size = end - start + 1;
+		int[] dp = new int[size];
+		dp[0] = money[start];
+		dp[1] = Math.max(money[start], money[start + 1]);
 
-        //마지막 값과 첫번째 값은??
-        return 0;
-    }
+		for (int i = 2; i < size; i++) {
+			dp[i] = Math.max(money[i] + dp[i - 2], dp[i - 1]);
+		}
+		return dp[size - 1];
+	}
 
-    public static void main(String[] args) {
-        도둑질 test = new 도둑질();
-        int[] money = {1, 2, 3, 1};
-        System.out.println(test.solution(money)); // 기대값: 4
-    }
+	public static void main(String[] args) {
+		도둑질 test = new 도둑질();
+		int[] money = {1, 2, 3, 1};
+		System.out.println(test.solution(money)); // 기대값: 4
+	}
 }

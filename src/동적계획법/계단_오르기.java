@@ -12,17 +12,21 @@ package 동적계획법;
  * @link https://leetcode.com/problems/climbing-stairs/
  */
 public class 계단_오르기 {
-    private static int answer = 0;
+    private int[] memo;
     public int climbStairs(int n) {
+        memo = new int[n + 1];
         return step(0, n);
     }
     private int step (int start, int end) {
-        if(start == end) {
-            return 1;
-        }
+        if(memo[start] != 0) return memo[start];
+        if(start == end) return 1;
+
         int oneStep = step(start + 1, end);
         int twoStep = end - start >= 2 ?  step(start + 2, end) : 0;
-        return oneStep + twoStep;
+
+        memo[start] = oneStep + twoStep;
+
+        return memo[start];
     }
 
     public static void main(String[] args) {

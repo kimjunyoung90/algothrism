@@ -25,7 +25,7 @@ public class 도둑질 {
 		dp[start] = money[start];
 		dp[start + 1] = Math.max(money[start], money[start + 1]);
 
-		for (int i = start + 2; i < end; i++) {
+		for (int i = start + 2; i <= end; i++) {
 			dp[i] = Math.max(money[i] + dp[i - 2], dp[i - 1]);
 		}
 		return dp[end];

@@ -21,15 +21,14 @@ public class 도둑질 {
 	}
 
 	private int rob(int[] money, int start, int end) {
-		int size = end - start + 1;
-		int[] dp = new int[size];
-		dp[0] = money[start];
-		dp[1] = Math.max(money[start], money[start + 1]);
+		int[] dp = new int[money.length];
+		dp[start] = money[start];
+		dp[start + 1] = Math.max(money[start], money[start + 1]);
 
-		for (int i = 2; i < size; i++) {
+		for (int i = start + 2; i < end; i++) {
 			dp[i] = Math.max(money[i] + dp[i - 2], dp[i - 1]);
 		}
-		return dp[size - 1];
+		return dp[end];
 	}
 
 	public static void main(String[] args) {

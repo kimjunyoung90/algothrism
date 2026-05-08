@@ -14,8 +14,8 @@ package 동적계획법;
  */
 public class 집털이범 {
 	public int rob(int[] nums) {
-		// TODO(human): 구현하세요.
-		//일직선 상에 늘어선 집.... 인접한 두 집 털 수 없음
+		//edge case
+		if(nums.length == 1) return nums[0];
 		int[] max = new int[nums.length];
 		max[0] = nums[0];
 		max[1] = Math.max(nums[1], nums[0]);

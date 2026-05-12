@@ -16,17 +16,7 @@ public class 안테나 {
     public int solution(int[] houses) {
         // TODO(human): 정렬된 houses 배열에서 거리 총합이 최소가 되는 위치를 골라 반환
         Arrays.sort(houses);
-        int min = Integer.MAX_VALUE;
-        int result = 0;
-        //1. 안테나 위치로 부터 각 집의 거리 구하기
-        for (int i = 0; i < houses.length; i++) {
-            int distance = getDistance(houses[i], houses);
-            if(distance < min) {
-                result = houses[i];
-                min = distance;
-            }
-        }
-        return result;
+        return houses[(houses.length - 1) / 2];
     }
 
     public int getDistance(int antenna, int[] houses) {

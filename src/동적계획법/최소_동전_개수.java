@@ -26,20 +26,20 @@ public class 최소_동전_개수 {
         //떠오르는데로 해보자.
         //정렬 default는 오름차순
         min = Integer.MAX_VALUE;
-        getUsedCount(amount, 0, 0, coins, 0);
+        getUsedCount(0, amount, 0, 0, coins);
         return min == Integer.MAX_VALUE ? -1 : min;
     }
 
-    public void getUsedCount(int target, int accum, int depth, int[] coins, int start) {
+    public void getUsedCount(int start, int amount, int sum, int depth, int[] coins) {
         if(depth > min) return;
-        if(target == accum) {
+        if(amount == sum) {
             min = Math.min(depth, min);
             return;
         }
-        if(accum > target) return;
+        if(sum > amount) return;
 		for (int i = start; i < coins.length; i++) {
             int coin = coins[i];
-			getUsedCount(target, accum + coin, depth + 1, coins, i);
+			getUsedCount(i, amount, sum + coin, depth + 1, coins);
 		}
     }
 

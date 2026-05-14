@@ -18,26 +18,27 @@ import java.util.*;
  * @link https://leetcode.com/problems/coin-change/
  */
 public class 최소_동전_개수 {
-    private List<Integer> answers;
+    private int min;
     public int coinChange(int[] coins, int amount) {
         // TODO(human): 구현하세요.
         //목표 금액을 만들기 위해 필요한 동전의 최소 개수
         //목표 금액이 되기까지 동전을 하나씩 사용하면서 목표금액을 만족했을 때 사용된 동전의 갯수를 반환하고 최소 값을 확인하면 되겠네.
         //떠오르는데로 해보자.
         //정렬 default는 오름차순
-        answers = new ArrayList<>();
+        min = Integer.MAX_VALUE;
         getUsedCount(amount, 0, 0, coins);
-        return answers.isEmpty() ? -1 : Collections.min(answers);
+        return min == Integer.MAX_VALUE ? -1 : min;
     }
 
     public void getUsedCount(int target, int accum, int depth, int[] coins) {
+//        if(depth > min) return;
         if(target == accum) {
-            answers.add(depth);
+            min = Math.min(depth, min);
             return;
         }
         if(accum > target) return;
 		for (int coin : coins) {
-			getUsedCount(target - coin, accum, depth + 1, coins);
+			getUsedCount(target, accum + coin, depth + 1, coins);
 		}
     }
 

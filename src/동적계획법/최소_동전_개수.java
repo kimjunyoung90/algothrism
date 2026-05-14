@@ -24,6 +24,7 @@ public class 최소_동전_개수 {
 		return min == Integer.MAX_VALUE ? -1 : min;
 	}
 
+	//FixMe : Time Limit Exceeded 발생
 	public void getUsedCount(int start, int amount, int sum, int depth, int[] coins) {
 		if (depth > min) return;
 		if (amount == sum) {

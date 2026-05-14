@@ -31,7 +31,7 @@ public class 최소_동전_개수 {
     }
 
     public void getUsedCount(int target, int accum, int depth, int[] coins, int start) {
-//        if(depth > min) return;
+        if(depth > min) return;
         if(target == accum) {
             min = Math.min(depth, min);
             return;

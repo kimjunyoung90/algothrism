@@ -36,10 +36,9 @@ public class 최소_동전_개수 {
             return;
         }
         if(accum > target) return;
-        for (int i = 0; i < coins.length; i++) {
-            int coin = coins[i];
-            getUsedCount(target - coin, accum, depth + 1, coins);
-        }
+		for (int coin : coins) {
+			getUsedCount(target - coin, accum, depth + 1, coins);
+		}
     }
 
     public static void main(String[] args) {

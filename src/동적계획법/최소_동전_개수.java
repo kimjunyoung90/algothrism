@@ -18,32 +18,25 @@ import java.util.Arrays;
  * @link https://leetcode.com/problems/coin-change/
  */
 public class 최소_동전_개수 {
-
+	private int[] dp;
 	public int coinChange(int[] coins, int amount) {
 		// dp[i] = i원을 만드는 최소 동전 개수
 		// 도달 불가능을 표시할 값으로 amount + 1 사용 (절대 나올 수 없는 큰 값 = 최소 1원 기준)
-		int[] dp = new int[amount + 1];
+		dp = new int[amount + 1];
 		Arrays.fill(dp, amount + 1);
 		dp[0] = 0;  // 0원은 동전 0개로 만들 수 있음
 
 		// 1원부터 amount 원까지 차례대로 필요한 최소 동전 개수를 채워나간다.
 		for (int i = 1; i <= amount; i++) {
-			int totalCount = getCount(i, 0, 0, coins, 0);
-			dp[i] = Math.min(dp[i], totalCount);
+			for (int coin : coins) {
+				if(i >= coin) {
+					int rest = dp[i - coin];
+					dp[i] = Math.min(dp[i], 1 + rest);
+				}
+			}
 		}
 
 		return dp[amount] > amount ? -1 : dp[amount];
-	}
-
-	//동전을 사용할때마다 사용한 동전의 수를 count = depth
-	public int getCount(int amount, int depth, int sum, int[] coins, int start) {
-		if(amount == sum) return depth;
-		if(amount < sum) return amount + 1;
-		int totalCount = 0;
-		for (int i = start; i < coins.length; i++) {
-			totalCount = getCount(amount, depth + 1, sum + coins[i], coins, i);
-		}
-		return totalCount;
 	}
 
 	public static void main(String[] args) {

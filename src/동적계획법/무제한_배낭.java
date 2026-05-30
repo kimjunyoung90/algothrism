@@ -53,10 +53,30 @@ public class 무제한_배낭 {
         return max;
     }
 
+    /**
+     * 1차원 bottom-up 버전.
+     * dp[i] = 용량 i를 초과하지 않으면서 만들 수 있는 최대 합
+     */
+    public int unboundedKnapsack1D(int k, int[] arr) {
+        int[] dp = new int[k + 1];
+        for (int i = 1; i <= k; i++) {
+            for (int w : arr) {
+                if (w <= i) {
+                    // TODO(human): dp[i]를 갱신하는 점화식 한 줄
+                    dp[i] = Math.max(dp[i], dp[i - w] + w);
+                }
+            }
+        }
+        return dp[k];
+    }
+
     public static void main(String[] args) {
         무제한_배낭 test = new 무제한_배낭();
 
         System.out.println(test.unboundedKnapsack(12, new int[]{1, 6, 9}));      // 기대값: 12
         System.out.println(test.unboundedKnapsack(9, new int[]{3, 4, 4, 4, 8})); // 기대값: 9
+
+        System.out.println(test.unboundedKnapsack1D(12, new int[]{1, 6, 9}));      // 기대값: 12
+        System.out.println(test.unboundedKnapsack1D(9, new int[]{3, 4, 4, 4, 8})); // 기대값: 9
     }
 }

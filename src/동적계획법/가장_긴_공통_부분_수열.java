@@ -16,8 +16,24 @@ package 동적계획법;
  */
 public class 가장_긴_공통_부분_수열 {
     public int longestCommonSubsequence(String text1, String text2) {
-        // TODO(human): 구현하세요.
-        return 0;
+        //text1에서 i 선택, text2에서 j 선택 시 구할 수 있는 공통된 최대 부분 수열을 구하라.
+        int n = text1.length();
+        int m = text2.length();
+        int[][] dp = new int[n + 1][m + 1];
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                //각각의 앞글자.
+                char c1 = text1.charAt(i - 1);
+                char c2 = text2.charAt(j - 1);
+                // TODO(human): 점화식을 적용해 dp[i][j]를 채우세요.
+                if(c1 == c2) {
+                    dp[i][j] = dp[i - 1][j - 1] + 1;
+                } else {
+                    dp[i][j] = Math.max(dp[i][j - 1], dp[i - 1][j]);
+                }
+            }
+        }
+        return dp[n][m];
     }
 
     public static void main(String[] args) {

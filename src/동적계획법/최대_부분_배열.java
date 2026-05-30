@@ -40,8 +40,8 @@ public class 최대_부분_배열 {
         }
 
         // 양수가 하나라도 있으면 그 합, 전부 음수면 최대 단일 원소
-        int subseqBest = subseqSum > 0 ? subseqSum : maxElem;
-        return List.of(subarrayBest, subseqBest);
+        subseqSum = subseqSum > 0 ? subseqSum : maxElem;
+        return List.of(subarrayBest, subseqSum);
     }
 
     public static void main(String[] args) {

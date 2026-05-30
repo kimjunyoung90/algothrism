@@ -24,10 +24,6 @@ public class 최대_부분_배열 {
 
         for (int i = 1; i < arr.size(); i++) {
             int x = arr.get(i);
-            // TODO(human): 매 원소 x에 대해 세 변수를 갱신하세요.
-            //  - subarrayCur : x 단독 vs (이전 합 + x) 중 큰 쪽
-            //  - subarrayBest: 지금까지 본 최고 연속 합
-            //  - subseqBest  : 부분 수열 합 (x가 도움 될 때만 더함)
             //부분 배열
             subarrayCur += x;
             subarrayBest = Math.max(subarrayBest, subarrayCur);

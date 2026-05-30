@@ -41,9 +41,6 @@ public class 무제한_배낭 {
         if(target == sum) {
             return sum;
         }
-        if(start >= arr.length) {
-            return target;
-        }
         if(dp[target - sum][start] != -1) {
             return dp[target - sum][start];
         }

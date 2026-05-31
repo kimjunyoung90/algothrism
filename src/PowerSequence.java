@@ -42,7 +42,7 @@ public class PowerSequence {
         TreeSet<Long> set = new TreeSet<>(); // 중복 제거 + 자동 정렬
         set.add(1L);                         // 1 포함 (1 = 1^2)
 
-        for (int i = 2; i < LIMIT; i++) {
+        for (int i = 2; (long) i * i <= LIMIT; i++) {
             long value = (long) i * i;
             while (value <= LIMIT) {
                 set.add(value);

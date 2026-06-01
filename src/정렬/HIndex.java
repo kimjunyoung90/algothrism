@@ -19,6 +19,8 @@ public class HIndex {
 		int answer;
 		Arrays.sort(citations);
 
+		//논문을 1회 발표, 해당 논문은 10회 인용
+		//논문을 10회 이상 인용된 논문이 1개, 논문이 10회 이하 인용된 논문이 1개
 		int middle = citations[citations.length / 2];
 		while (true) {
 			int right = citations.length - middle;

@@ -38,8 +38,11 @@ public class HIndex {
 
 	public static void main(String[] args) {
 		HIndex test = new HIndex();
-		int[] citations = {3, 0, 6, 1, 5};
-		int result = test.solution(citations);
-		System.out.println(result); // 기대값: 3
+		System.out.println(test.solution(new int[]{3, 0, 6, 1, 5})); // 기대값: 3
+		System.out.println(test.solution(new int[]{10}));            // 기대값: 1
+		System.out.println(test.solution(new int[]{0}));             // 기대값: 0
+		System.out.println(test.solution(new int[]{12, 11, 10}));    // 기대값: 3
+		System.out.println(test.solution(new int[]{0, 100}));        // 기대값: 1
+		System.out.println(test.solution(new int[]{4, 4, 4, 4}));    // 기대값: 4
 	}
 }

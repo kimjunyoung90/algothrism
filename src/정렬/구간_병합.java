@@ -21,25 +21,17 @@ public class 구간_병합 {
 		Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
 		List<int[]> result = new ArrayList<>();
 		//1번째 값
-		result.add(intervals[0]);
-		int idx = 0;
+		int[] last = intervals[0];
+		result.add(last);
 		for (int[] interval : intervals) {
 			int start = interval[0];
 			int end = interval[1];
 
-			int lastEnd = result.get(idx)[1];
-
-			if (start > lastEnd) {
-				//새로운 interval 시작
-				result.add(new int[]{start, end});
-				idx++;
-			} else if (start < lastEnd) {
-				//end 가 기존 종료보다 클 수 있음
-				if (end > lastEnd) {
-					result.get(idx)[1] = end;
-				}
+			if(start <= last[1]) {
+				last[1] = Math.max(last[1], end);
 			} else {
-				result.get(idx)[1] = end;
+				last = interval;
+				result.add(last);
 			}
 		}
 		return result.toArray(new int[0][]);

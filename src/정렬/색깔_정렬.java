@@ -19,29 +19,31 @@ public class 색깔_정렬 {
     public void sortColors(int[] nums) {
         // TODO(human): 구현하세요.
         //0, 1, 2
-        int lastIdx = 0;
-        for (int i = 0; i < nums.length; i++) {
-            if(nums[i] == 0) {
-                int temp = nums[lastIdx];
-                nums[lastIdx] = nums[i];
-                nums[i] = temp;
-                lastIdx++;
-            }
-        }
-        for (int i = lastIdx; i < nums.length; i++) {
-            if(nums[i] == 1) {
-                int temp = nums[lastIdx];
-                nums[lastIdx] = nums[i];
-                nums[i] = temp;
-                lastIdx++;
-            }
-        }
-        for (int i = lastIdx; i < nums.length; i++) {
-            if(nums[i] == 2) {
-                int temp = nums[lastIdx];
-                nums[lastIdx] = nums[i];
-                nums[i] = temp;
-                lastIdx++;
+        //0이 있는 곳
+        //1이 있는 곳
+        //2가 있는 곳
+        int low = 0; //0이 들어갈 위치(앞에서부터 채움)
+        int cursor = 0; //현재 커서
+        int high = nums.length - 1; //2가 들어갈 위치(뒤에서 부터 채움)
+        while (cursor <= high) {
+            switch (nums[cursor]) {
+                case 0 -> {
+                    int temp = nums[low];
+                    nums[low] = nums[cursor];
+                    nums[cursor] = temp;
+                    low++;
+                    cursor++;
+                }
+                case 1 -> {
+                    //do nothing
+                    cursor++;
+                }
+                case 2 -> {
+                    int temp = nums[high];
+                    nums[high] = nums[cursor];
+                    nums[cursor] = temp;
+                    high--;
+                }
             }
         }
     }

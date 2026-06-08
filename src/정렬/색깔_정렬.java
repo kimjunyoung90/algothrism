@@ -19,7 +19,7 @@ public class 색깔_정렬 {
     public void sortColors(int[] nums) {
         // TODO(human): 구현하세요.
         //0, 1, 2
-        int lastIdx = getLastIdx(0, 0, nums);
+        int lastIdx = 0;
         for (int i = 0; i < nums.length; i++) {
             if(nums[i] == 0) {
                 int temp = nums[lastIdx];
@@ -44,18 +44,6 @@ public class 색깔_정렬 {
                 lastIdx++;
             }
         }
-        System.out.println(Arrays.toString(nums));
-    }
-
-    private int getLastIdx (int target, int start, int[] nums) {
-        int lastIdx = start;
-        while (lastIdx < nums.length) {
-            if(nums[lastIdx] != target) {
-                break;
-            }
-            lastIdx++;
-        }
-        return lastIdx;
     }
 
     public static void main(String[] args) {

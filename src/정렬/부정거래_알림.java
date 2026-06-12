@@ -17,34 +17,59 @@ import java.util.Comparator;
  * @link https://www.hackerrank.com/challenges/fraudulent-activity-notifications/problem
  */
 public class 부정거래_알림 {
+
+    // ── counting sort 버전 (작업 중) ──────────────────────────────
+    private static final int MAX_VALUE = 200_000;
+
     public int activityNotifications(int[] expenditure, int d) {
+        int[] count = new int[MAX_VALUE + 1];
+
+        for (int i = 0; i < d; i++) {
+            count[expenditure[i]]++;
+        }
 
         int answer = 0;
         for (int i = d; i < expenditure.length; i++) {
-            int target = expenditure[i];
-            if(target >= mid(expenditure, i, d)) {
+            if (expenditure[i] >= twiceMedian(count, d)) {
                 answer++;
             }
+            count[expenditure[i - d]]--;
+            count[expenditure[i]]++;
         }
 
         return answer;
     }
 
-    private int mid (int[] expenditure, int target, int d) {
+    private int twiceMedian(int[] count, int d) {
+        int median = 0;
+		int accum = 0;
+		if(d % 2 == 1) {
+			for (int i = 0; i < count.length; i++) {
+                accum += count[i];
+                if(accum >= d/2 + 1) {
+                    median = i;
+                    break;
+                }
+            }
+            median *= 2;
+		} else {
+			boolean findFirst = false;
+            for (int i = 0; i < count.length; i++) {
+                accum += count[i];
+                if(!findFirst && accum >= d/2) {
+                    median += i;
+                    findFirst = true;
+                }
+                if(accum >= d/2 + 1) {
+                    median += i;
+                    break;
+                }
+            }
+		}
 
-        int[] days = new int[d];
-        int from = target - d; //5 - 5 = 0
-        for (int i = 0; i < d; i++) {
-            days[i] = expenditure[from + i];
-        }
-        Arrays.sort(days);
-
-        if(d % 2 == 0) {
-            return (days[d/2] + days[d/2 - 1]);
-        }
-
-        return days[d/2] * 2;
+		return median;
     }
+    // ──────────────────────────────────────────────────────────────
 
     public static void main(String[] args) {
         부정거래_알림 test = new 부정거래_알림();

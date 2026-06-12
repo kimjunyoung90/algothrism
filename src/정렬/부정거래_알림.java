@@ -18,21 +18,11 @@ import java.util.Comparator;
  */
 public class 부정거래_알림 {
     public int activityNotifications(int[] expenditure, int d) {
-        // TODO(human): 구현하세요.
-        //고객의 하루 지출이 직전 d일간 지출의 중앙 값 2배 이상이면 부정거래 알림 발송
-        //d = 거래 데이터 검증해야하는 기간
-        //expenditure = 일별 지출 내역
-        //중앙 값 = 데이터를 크기 순으로 정렬했을 때 한 가운데에 있는 값
-        //1. d일간 지출 내역을 확인할 수 있는 날짜 확인
-        //ex) expenditure = 9, d = 5 면 6일부터 부정거래 확인 가능
-        int minDay = d + 1;//minday = 6;
 
-        //2. 검증 가능한 최소 날짜 부터 검증
         int answer = 0;
-        for (int i = minDay; i < expenditure.length; i++) {
-            //minDay = 6일째 값 = day - 1
-            int target = expenditure[i - 1];
-            if(target >= mid(expenditure, i - 1, d) * 2) {
+        for (int i = d; i < expenditure.length; i++) {
+            int target = expenditure[i];
+            if(target >= mid(expenditure, i, d)) {
                 answer++;
             }
         }
@@ -40,17 +30,20 @@ public class 부정거래_알림 {
         return answer;
     }
 
-    private int mid (int[] expenditure, int 부정거래의심, int d) {
-        //부정거래의심 = 5
-        //1 ~ 5; = to - from + 1
-        //5 -5 = 0 = 5 ~ 0; = 0, 1, 2, 3, 4
+    private int mid (int[] expenditure, int target, int d) {
+
         int[] days = new int[d];
-        int daysIdx = 0;
-        for (int i = 부정거래의심 - d; i < 부정거래의심; i++) {
-            days[daysIdx++] = expenditure[i];
+        int from = target - d; //5 - 5 = 0
+        for (int i = 0; i < d; i++) {
+            days[i] = expenditure[from + i];
         }
         Arrays.sort(days);
-        return days[d/2];
+
+        if(d % 2 == 0) {
+            return (days[d/2] + days[d/2 - 1]);
+        }
+
+        return days[d/2] * 2;
     }
 
     public static void main(String[] args) {

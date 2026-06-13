@@ -20,6 +20,7 @@ public class 병합정렬_역전쌍_세기 {
         // 횟수 +
         // 근데, 인접한 원소만 swap해서 정렬을 하려면 한번 순회해선 정렬이 되진 않을텐데.
         // 1. arr의 요소를 순회하며 인접한 원소 비교
+        //시간 복잡도는 O(n^2)
         int answer = 0;
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = 0; j < arr.length - 1; j++) {

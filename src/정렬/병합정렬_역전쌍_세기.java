@@ -14,35 +14,34 @@ package 정렬;
  */
 public class 병합정렬_역전쌍_세기 {
     public long countInversions(int[] arr) {
-        // TODO(human): 구현하세요.
-        // 목표 : 배열을 오름차순으로 정렬할 때 필요한 교환 횟수
-        // 인접한 원소를 교환
-        // 횟수 +
-        // 근데, 인접한 원소만 swap해서 정렬을 하려면 한번 순회해선 정렬이 되진 않을텐데.
-        // 1. arr의 요소를 순회하며 인접한 원소 비교
-        //시간 복잡도는 O(n^2)
-        int answer = 0;
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = 0; j < arr.length - 1; j++) {
-                int cur = arr[j];
-                int next = arr[j + 1];
-                //오름차순 = 작은 값이 선행
-                if(cur > next) {
-                    int temp = cur;
-                    arr[j] = next;
-                    arr[j + 1] = temp;
-                    answer++;
-                }
-            }
+        return seperate(arr, 0, arr.length - 1);
+    }
+
+    // [left, right] 구간을 정렬하며 역전쌍 개수를 반환한다.
+    private long seperate(int[] arr, int left, int right) {
+        // TODO(human): 1단계 - 구간을 반으로 나눠 재귀 호출하는 부분부터 작성
+        //언제까지??
+        if(left >= right) {
+            System.out.println(arr[left]);
+            return 0;
         }
 
-        return answer;
+        //요소가 다섯개다
+        //그럼 중간값은 3이다.
+        //왼쪽은 3개
+        //오른쪽은 2개
+        //0, 1, 2
+        //3, 4
+        int mid = (left + right) / 2;
+        seperate(arr, left, mid);
+        seperate(arr, mid + 1, right);
+        return 0;
     }
 
     public static void main(String[] args) {
         병합정렬_역전쌍_세기 test = new 병합정렬_역전쌍_세기();
 
         System.out.println(test.countInversions(new int[]{1, 1, 1, 2, 2})); // 기대값: 0
-        System.out.println(test.countInversions(new int[]{2, 1, 3, 1, 2})); // 기대값: 4
+//        System.out.println(test.countInversions(new int[]{2, 1, 3, 1, 2})); // 기대값: 4
     }
 }

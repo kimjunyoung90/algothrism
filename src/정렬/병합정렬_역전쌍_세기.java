@@ -33,7 +33,7 @@ public class 병합정렬_역전쌍_세기 {
         //오른쪽은 2개
         //0, 1, 2
         //3, 4
-        int count = 0;
+        long count = 0;
         int mid = (left + right) / 2;
         count += separate(arr, left, mid);
         count += separate(arr, mid + 1, right);
@@ -42,8 +42,8 @@ public class 병합정렬_역전쌍_세기 {
         return count;
     }
 
-    private int merge(int[] arr, int left, int mid, int right) {
-        int result = 0;
+    private long merge(int[] arr, int left, int mid, int right) {
+        long result = 0;
         //합칠 때는 가장 작은 원소를 선행해서 합친다.
         int[] L = Arrays.copyOfRange(arr, left, mid + 1);
         int[] R = Arrays.copyOfRange(arr, mid + 1, right + 1);
@@ -52,9 +52,8 @@ public class 병합정렬_역전쌍_세기 {
         int arrPointer = left;
         while (LStart < L.length && RStart < R.length) {
             //왼쪽이 더 작은 경우 왼쪽 요소를 담기
-            if(L[LStart] < R[RStart]) {
+            if(L[LStart] <= R[RStart]) {
                 //담기
-                result++;
                 arr[arrPointer++] = L[LStart++];
             } else {
                 //오른쪽이 더 작은 경우
@@ -66,11 +65,11 @@ public class 병합정렬_역전쌍_세기 {
         //나머지 값은 자동 병합(아 맞네 어짜피 각 분할된 배열은 정렬되어 있지.)
         while (LStart < L.length) {
             arr[arrPointer++] = L[LStart++];
-            result++;
+//            result++;
         }
         while (RStart < R.length) {
             arr[arrPointer++] = R[RStart++];
-            result++;
+//            result++;
         }
         return result;
     }

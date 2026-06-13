@@ -57,7 +57,7 @@ public class 병합정렬_역전쌍_세기 {
                 arr[arrPointer++] = L[LStart++];
             } else {
                 //오른쪽이 더 작은 경우
-                result ++;
+                result += L.length - LStart;
                 arr[arrPointer++] = R[RStart++];
             }
         }
@@ -78,6 +78,6 @@ public class 병합정렬_역전쌍_세기 {
         병합정렬_역전쌍_세기 test = new 병합정렬_역전쌍_세기();
 
         System.out.println(test.countInversions(new int[]{1, 1, 1, 2, 2})); // 기대값: 0
-//        System.out.println(test.countInversions(new int[]{2, 1, 3, 1, 2})); // 기대값: 4
+        System.out.println(test.countInversions(new int[]{2, 1, 3, 1, 2})); // 기대값: 4
     }
 }

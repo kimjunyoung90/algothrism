@@ -14,11 +14,11 @@ package 정렬;
  */
 public class 병합정렬_역전쌍_세기 {
     public long countInversions(int[] arr) {
-        return seperate(arr, 0, arr.length - 1);
+        return separate(arr, 0, arr.length - 1);
     }
 
     // [left, right] 구간을 정렬하며 역전쌍 개수를 반환한다.
-    private long seperate(int[] arr, int left, int right) {
+    private long separate(int[] arr, int left, int right) {
         // TODO(human): 1단계 - 구간을 반으로 나눠 재귀 호출하는 부분부터 작성
         //언제까지??
         if(left >= right) {
@@ -33,8 +33,8 @@ public class 병합정렬_역전쌍_세기 {
         //0, 1, 2
         //3, 4
         int mid = (left + right) / 2;
-        seperate(arr, left, mid);
-        seperate(arr, mid + 1, right);
+        separate(arr, left, mid);
+        separate(arr, mid + 1, right);
         return 0;
     }
 

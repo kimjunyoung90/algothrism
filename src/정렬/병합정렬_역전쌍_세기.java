@@ -24,7 +24,6 @@ public class 병합정렬_역전쌍_세기 {
         // TODO(human): 1단계 - 구간을 반으로 나눠 재귀 호출하는 부분부터 작성
         //언제까지??
         if(left >= right) {
-            System.out.println(arr[left]);
             return 0;
         }
 
@@ -34,15 +33,16 @@ public class 병합정렬_역전쌍_세기 {
         //오른쪽은 2개
         //0, 1, 2
         //3, 4
+        int count = 0;
         int mid = (left + right) / 2;
-        separate(arr, left, mid);
-        separate(arr, mid + 1, right);
+        count += separate(arr, left, mid);
+        count += separate(arr, mid + 1, right);
         //분할된 요소를 합친다.
-        merge(arr, left, mid, right);
-        return 0;
+        count += merge(arr, left, mid, right);
+        return count;
     }
 
-    private long merge(int[] arr, int left, int mid, int right) {
+    private int merge(int[] arr, int left, int mid, int right) {
         int result = 0;
         //합칠 때는 가장 작은 원소를 선행해서 합친다.
         int[] L = Arrays.copyOfRange(arr, left, mid + 1);

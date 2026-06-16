@@ -21,23 +21,26 @@ public class 큰_수_만들기 {
 
         //살아남은 대상
         Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < number.length() - 1; i++) {
-            char cur = number.charAt(0);
-
-            stack.push(cur);
+        for (int i = 0; i < number.length(); i++) {
+            char cur = number.charAt(i);
 
             //제거
             while (k > 0 && !stack.isEmpty() && stack.peek() < cur) {
                 stack.pop();
                 k--;
             }
-        }
 
+            stack.push(cur);
+        }
         while (k > 0) {
             stack.pop();
             k--;
         }
-        return "";
+        StringBuilder sb = new StringBuilder();
+        for (char c : stack) {
+            sb.append(c);
+        }
+        return sb.toString();
     }
 
     public static void main(String[] args) {

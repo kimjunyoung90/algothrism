@@ -42,7 +42,7 @@ public class 큰_수_만들기 {
         for (char c : stack) {
             sb.append(c);
         }
-        return sb.toString();
+        return sb.reverse().toString();
     }
 
     public static void main(String[] args) {

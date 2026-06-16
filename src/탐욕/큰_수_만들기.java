@@ -21,27 +21,21 @@ public class 큰_수_만들기 {
 
         //살아남은 대상
         Stack<Character> stack = new Stack<>();
-
         for (int i = 0; i < number.length() - 1; i++) {
-            char cur = number.charAt(i);
-            char next = number.charAt(i + 1);
-
-            //제거
-            if(cur < next) {
-                //현재 숫자가 뒤 숫자 보다 작아서 제거했는데, 전전 숫자가 뒤 숫자보다 작으면 제거
-                while (!stack.isEmpty() && stack.peek() < next) {
-                    stack.pop();
-                }
-                //최대 제거 수를 초과하는 경우에는??
-                //뒷에 배치된 숫자부터 제거(앞의 숫자가 자리수가 커 영향이 더 큼)
-                while(stack.size() > k) {
-                    stack.pop();
-                }
-
-                continue;
-            }
+            char cur = number.charAt(0);
 
             stack.push(cur);
+
+            //제거
+            while (k > 0 && !stack.isEmpty() && stack.peek() < cur) {
+                stack.pop();
+                k--;
+            }
+        }
+
+        while (k > 0) {
+            stack.pop();
+            k--;
         }
         return "";
     }

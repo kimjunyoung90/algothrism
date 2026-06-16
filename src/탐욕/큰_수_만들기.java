@@ -1,0 +1,55 @@
+package 탐욕;
+
+import java.util.Stack;
+
+/**
+ * 큰_수_만들기
+ *
+ * 문자열 number에서 k개의 수를 제거했을 때 만들 수 있는 가장 큰 수를 구한다.
+ *
+ * 제약조건:
+ * - number는 2자리 이상 1,000,000자리 이하인 숫자 문자열
+ * - k는 1 이상 number의 자릿수 미만인 자연수
+ *
+ * @link https://school.programmers.co.kr/learn/courses/30/lessons/42883
+ */
+public class 큰_수_만들기 {
+    public String solution(String number, int k) {
+        // TODO(human): 구현하세요.
+        // 현재 숫자가 바로 뒤에 있는 숫자보다 작으면 제거
+        // = 현재 숫자가 바로 뒤에 있는 숫자보다 크면 미제거
+
+        //살아남은 대상
+        Stack<Character> stack = new Stack<>();
+
+        for (int i = 0; i < number.length() - 1; i++) {
+            char cur = number.charAt(i);
+            char next = number.charAt(i + 1);
+
+            //제거
+            if(cur < next) {
+                //현재 숫자가 뒤 숫자 보다 작아서 제거했는데, 전전 숫자가 뒤 숫자보다 작으면 제거
+                while (!stack.isEmpty() && stack.peek() < next) {
+                    stack.pop();
+                }
+                //최대 제거 수를 초과하는 경우에는??
+                //뒷에 배치된 숫자부터 제거(앞의 숫자가 자리수가 커 영향이 더 큼)
+                while(stack.size() > k) {
+                    stack.pop();
+                }
+
+                continue;
+            }
+
+            stack.push(cur);
+        }
+        return "";
+    }
+
+    public static void main(String[] args) {
+        큰_수_만들기 test = new 큰_수_만들기();
+        System.out.println(test.solution("1924", 2));        // 기대값: 94
+        System.out.println(test.solution("1231234", 3));     // 기대값: 3234
+        System.out.println(test.solution("4177252841", 4));  // 기대값: 775841
+    }
+}

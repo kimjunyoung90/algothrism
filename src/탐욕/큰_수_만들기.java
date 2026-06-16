@@ -1,5 +1,7 @@
 package 탐욕;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -20,7 +22,7 @@ public class 큰_수_만들기 {
         // = 현재 숫자가 바로 뒤에 있는 숫자보다 크면 미제거
 
         //살아남은 대상
-        Stack<Character> stack = new Stack<>();
+        Deque<Character> stack = new ArrayDeque<>();
         for (int i = 0; i < number.length(); i++) {
             char cur = number.charAt(i);
 

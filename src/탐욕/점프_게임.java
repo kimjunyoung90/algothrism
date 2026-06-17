@@ -20,15 +20,12 @@ public class 점프_게임 {
 
     private boolean nextStep(int current, int[] nums) {
 
-        if(current > nums.length) {
-            return false;
-        }
-
-        if(current == nums.length) {
+        if(current >= nums.length - 1) {
             return true;
         }
 
         int maxStep = nums[current];
+
         boolean result;
 
         for (int i = current; i < current + maxStep; i++) {

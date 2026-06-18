@@ -20,7 +20,6 @@ public class N과_M_2 {
 	private int[] result;
 
 	public void solution() {
-		// TODO(human): 구현하세요.
 		result = new int[M];
 		search(0, 0);
 	}

@@ -1,7 +1,5 @@
 package 완전탐색;
 
-import java.util.Arrays;
-
 /**
  * N과 M (3)  (백준 15651)
  * <p>
@@ -29,7 +27,12 @@ public class N과_M_3 {
 
 	private void search(int depth) {
 		if (depth == M) {
-			System.out.println(Arrays.toString(result));
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < M; i++) {
+				sb.append(result[i]);
+				if (i < M - 1) sb.append(' ');
+			}
+			System.out.println(sb);
 			return;
 		}
 

@@ -21,14 +21,6 @@ public class N과_M_1 {
 	private boolean[] visited;
 
 	public void solution() {
-		// TODO(human): 구현하세요.
-		//N = 4
-		//M = 2
-		//1 2, 1 3, 1 4
-		//2 1, 2 3, 2 4
-		//3 1, 3 2, 3 4
-		//4 1, 4 2, 4 3
-		//반복문은 언제까지 중첩?? M까지
         result = new int[M];
         visited = new boolean[N];
 		search(0);

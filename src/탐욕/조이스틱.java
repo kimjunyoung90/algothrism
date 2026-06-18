@@ -36,10 +36,12 @@ public class 조이스틱 {
                 next++;
             }
 
-            // TODO(human): 두 꺾기 경로의 비용을 계산해 move를 최소값으로 갱신하세요.
-            //  - 오른쪽 i까지 갔다가 되돌아 왼쪽 끝으로
-            //  - 왼쪽 끝으로 먼저 갔다가 오른쪽 i까지
-            //모르겠다..
+            // 오른쪽 i까지 갔다가 되돌아 왼쪽 끝(순환)으로 가는 비용
+            int rightThenLeft = i + i + (n - next);
+            // 왼쪽 끝(순환)으로 먼저 갔다가 오른쪽 i까지 가는 비용
+            int leftThenRight = (n - next) + (n - next) + i;
+
+            move = Math.min(move, Math.min(rightThenLeft, leftThenRight));
         }
 
         return upDown + move;

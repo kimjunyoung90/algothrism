@@ -48,11 +48,32 @@ public class 점프_게임 {
         return false;
     }
 
+    /**
+     * 그리디 버전 (O(n) 시간 / O(1) 공간)
+     * "지금까지 도달 가능한 가장 먼 인덱스(maxReach)"만 들고 배열을 한 번 순회한다.
+     */
+    public boolean canJumpGreedy(int[] nums) {
+        int maxReach = 0;
+        // TODO(human): maxReach를 갱신하며 도달 가능 여부를 판단하세요.
+        // 특정 위치에 있을 때 도달 가능한 가장 먼 곳
+        for (int i = 0; i < nums.length; i++) {
+            if(maxReach < i) continue;
+            maxReach = Math.max(maxReach, i + nums[i]);
+        }
+
+        if(maxReach >= nums.length) return true;
+
+        return false;
+    }
+
     public static void main(String[] args) {
         점프_게임 test = new 점프_게임();
         //중복 연산 문제
         //0(2) -> 1(3) 2
         System.out.println(test.canJump(new int[]{2, 3, 1, 1, 4})); // 기대값: true
         System.out.println(test.canJump(new int[]{3, 2, 1, 0, 4})); // 기대값: false
+
+        System.out.println(test.canJumpGreedy(new int[]{2, 3, 1, 1, 4})); // 기대값: true
+        System.out.println(test.canJumpGreedy(new int[]{3, 2, 1, 0, 4})); // 기대값: false
     }
 }

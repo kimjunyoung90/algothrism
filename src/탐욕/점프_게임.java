@@ -14,20 +14,30 @@ package 탐욕;
  * @link https://leetcode.com/problems/jump-game/
  */
 public class 점프_게임 {
+    boolean[] visited;
     public boolean canJump(int[] nums) {
+        visited = new boolean[nums.length + 1];
         return nextStep(0, nums);
     }
 
     private boolean nextStep(int current, int[] nums) {
 
+        //도달
         if(current >= nums.length - 1) {
             return true;
         }
 
+        //방문한 적 있음
+        if(visited[current]) return false;
+
+        //방문
+        visited[current] = true;
+
+        //최대 점프 수
         int maxStep = nums[current];
 
+        //도달 가능한 곳 방문
         boolean result;
-
         for (int i = current; i < current + maxStep; i++) {
             result = nextStep(i + 1, nums);
             if(result) {
@@ -40,6 +50,8 @@ public class 점프_게임 {
 
     public static void main(String[] args) {
         점프_게임 test = new 점프_게임();
+        //중복 연산 문제
+        //0(2) -> 1(3) 2
         System.out.println(test.canJump(new int[]{2, 3, 1, 1, 4})); // 기대값: true
         System.out.println(test.canJump(new int[]{3, 2, 1, 0, 4})); // 기대값: false
     }

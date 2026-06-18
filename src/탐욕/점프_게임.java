@@ -61,10 +61,8 @@ public class 점프_게임 {
             maxReach = Math.max(maxReach, i + nums[i]);
         }
 
-        if(maxReach >= nums.length) return true;
-
-        return false;
-    }
+		return maxReach >= nums.length - 1;
+	}
 
     public static void main(String[] args) {
         점프_게임 test = new 점프_게임();

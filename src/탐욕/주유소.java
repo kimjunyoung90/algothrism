@@ -22,14 +22,33 @@ public class 주유소 {
         //i에서 출발했을 때 한 바퀴 돌고 i로 돌아올 수 있는 인덱스
         //gas = 충전 가능한 기름
         //cost = 현재로 오기 위해 필요한 기름
-        int totalGas = 0;
         for (int i = 0; i < cost.length; i++) {
+            int result = startCircle(gas, cost, i);
+            if(result != -1) return result;
+        }
+        return -1;
+    }
+
+    private static int startCircle(int[] gas, int[] cost, int start) {
+        int totalGas = 0;
+
+        //시작점을 다르게 해서 탐색하면 될 듯
+        for (int i = start; i < cost.length; i++) {
             //현재 충전소에서 gas 충전하고
             totalGas += gas[i];
             //다음 충전소 가기 위해 gas 소비
             totalGas -= cost[i];
+            if(totalGas < 0) return -1;
         }
-        return -1;
+
+        for (int i = 0; i < start; i++) {
+            //현재 충전소에서 gas 충전하고
+            totalGas += gas[i];
+            //다음 충전소 가기 위해 gas 소비
+            totalGas -= cost[i];
+            if(totalGas < 0) return -1;
+        }
+        return start;
     }
 
     public static void main(String[] args) {

@@ -21,12 +21,14 @@ public class N과_M_5 {
 	static int N;
 	static int M;
 	static int[] nums;
-	int[] result;
+	static int[] result;
+	static boolean[] visited;
 
 	public void solution() {
 		// TODO(human): 구현하세요.
 		// 같은 수열(2,1) = (2,1), (2,1) != (1, 2)
 		result = new int[M];
+		visited = new boolean[N];
 		Arrays.sort(nums);
 		search(0);
 	}
@@ -38,8 +40,13 @@ public class N과_M_5 {
 		}
 
 		for (int i = 0; i < nums.length; i++) {
+			//이미 사용한 수 재사용 방지
+			if(visited[i]) continue;
+
 			result[depth] = nums[i];
+			visited[i] = true;
 			search(depth + 1);
+			visited[i] = false;
 		}
 	}
 

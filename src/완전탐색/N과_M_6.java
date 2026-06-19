@@ -23,12 +23,10 @@ public class N과_M_6 {
 	static int M;
 	static int[] nums;
 	static int[] result;
-	static boolean[] visited;
 
 	public void solution() {
 		// TODO(human): 구현하세요.
 		result = new int[M];
-		visited = new boolean[N];
 		Arrays.sort(nums);
 		backtrack(0, 0);
 	}
@@ -40,9 +38,7 @@ public class N과_M_6 {
 		}
 		for (int i = start; i < nums.length; i++) {
 			result[depth] = nums[i];
-			visited[i] = true;
-			backtrack(i, depth + 1);
-			visited[i] = false;
+			backtrack(i + 1, depth + 1);
 		}
 	}
 

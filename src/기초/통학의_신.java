@@ -21,7 +21,7 @@ public class 통학의_신 {
                 sb.append(i).append(' ');
             }
         }
-        return sb.toString();
+        return sb.toString().trim();
     }
 
     public static void main(String[] args) {

@@ -27,14 +27,14 @@ public class N과_M_6 {
 
 	public void solution() {
 		// TODO(human): 구현하세요.
-		result = new int[M + 1];
+		result = new int[M];
 		visited = new boolean[N];
 		Arrays.sort(nums);
 		backtrack(0, 0);
 	}
 
 	private void backtrack(int start, int depth) {
-		if(depth > M) {
+		if(depth == M) {
 			System.out.println(Arrays.toString(result));
 			return;
 		}

@@ -33,7 +33,12 @@ public class N과_M_6 {
 
 	private void backtrack(int start, int depth) {
 		if(depth == M) {
-			System.out.println(Arrays.toString(result));
+			StringBuilder sb = new StringBuilder();
+			for (int value : result) {
+				sb.append(value);
+				sb.append(" ");
+			}
+			System.out.println(sb);
 			return;
 		}
 		for (int i = start; i < nums.length; i++) {

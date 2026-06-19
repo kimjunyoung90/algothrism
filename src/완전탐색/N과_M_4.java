@@ -27,10 +27,10 @@ public class N과_M_4 {
 		//1부터 N까지 자연수 중에 M개를 골라 반환하는 문제
 		//같은 수를 고를 수 있고, 고른 수들은 비내림차순이어야 한다.
 		result = new int[M + 1];
-		search(1);
+		search(1, 1);
 	}
 
-	private void search(int depth) {
+	private void search(int start, int depth) {
 		if(depth > M) {
 			StringBuilder sb = new StringBuilder();
 			for (int i = 1; i < result.length; i++) {
@@ -42,12 +42,9 @@ public class N과_M_4 {
 		}
 
 		//중복 가능
-		for (int i = 1; i <= N; i++) {
-			if(result[depth - 1] != 0 && result[depth - 1] > i) {
-				continue;
-			}
+		for (int i = start; i <= N; i++) {
 			result[depth] = i;
-			search( depth + 1);
+			search(i, depth + 1);
 		}
 	}
 

@@ -15,28 +15,26 @@ package 완전탐색;
  */
 public class 색종이 {
     public int solution(int[][] papers) {
-        // TODO(human): 구현하세요.
-        //색종이 크기가 10
-        //왼쪽, 아래
-        int[][] position = new int[101][101];
-        for (int i = 0; i < papers.length; i++) {
-            int left = papers[i][0];
-            int bottom = papers[i][1];
-            for (int j = left; j < left + 10 ; j++) {
-                for (int k = bottom; k < bottom + 10; k++) {
-                    position[k][j] = 1;
+        boolean[][] board = new boolean[100][100];
+        for (int[] paper : papers) {
+            int left = paper[0];
+            int bottom = paper[1];
+            for (int y = bottom; y < bottom + 10; y++) {
+                for (int x = left; x < left + 10; x++) {
+                    board[y][x] = true;
                 }
             }
         }
-        int width = 0;
-        for (int i = 1; i < position.length; i++) {
-            for (int j = 1; j < position.length; j++) {
-                if(position[i][j] == 1) {
-                    width++;
+
+        int area = 0;
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board.length; x++) {
+                if(board[y][x]) {
+                    area++;
                 }
             }
         }
-        return width;
+        return area;
     }
 
     public static void main(String[] args) {

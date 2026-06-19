@@ -35,7 +35,12 @@ public class N과_M_5 {
 
 	private void search(int depth) {
 		if (depth == M) {
-			System.out.println(Arrays.toString(result));
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < result.length; i++) {
+				sb.append(result[i]);
+				sb.append(" ");
+			}
+			System.out.println(sb);
 			return;
 		}
 

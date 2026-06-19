@@ -1,7 +1,5 @@
 package 완전탐색;
 
-import java.util.Arrays;
-
 /**
  * 색종이
  *

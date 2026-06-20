@@ -40,15 +40,6 @@ public class 숫자_야구 {
 		//              인자로 받은 strike·ball과 모두 같은지 반환하세요.
 		//candidate가 정답이라고 가정했을 때
 		//number의 strike, ball 비율이 전달받은것과 동일한지 비교
-
-		//strike check
-
-		int canStrike = 0;
-		if (number / 100 == candidate / 100) canStrike++;
-		if ((number / 10 % 10) == (candidate / 10 % 10)) canStrike++;
-		if (number % 10 == candidate % 10) canStrike++;
-
-		int canBall = 0;
 		int number1 = number / 100;
 		int number2 = number / 10 % 10;
 		int number3 = number % 10;
@@ -56,6 +47,14 @@ public class 숫자_야구 {
 		int candidate1 = candidate / 100;
 		int candidate2 = candidate / 10 % 10;
 		int candidate3 = candidate % 10;
+
+		int canStrike = 0;
+		if (number1 == candidate1) canStrike++;
+		if (number2 == candidate2) canStrike++;
+		if (number3 == candidate3) canStrike++;
+
+		int canBall = 0;
+
 		//ball 개수에 따라서 판정 기준이 달라짐
 		if (ball == 1) {
 

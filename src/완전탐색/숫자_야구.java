@@ -54,16 +54,9 @@ public class 숫자_야구 {
 		if (number3 == candidate3) canStrike++;
 
 		int canBall = 0;
-
-		//ball 개수에 따라서 판정 기준이 달라짐
-		if (ball == 1) {
-
-		} else if (ball == 2) {
-
-		} else {
-
-		}
-
+		if(number1 == candidate2 || number1 == candidate3) canBall++;
+		if(number2 == candidate3 || number2 == candidate1) canBall++;
+		if(number3 == candidate1 || number3 == candidate2) canBall++;
 
 		return canStrike == strike && canBall == ball;
 	}

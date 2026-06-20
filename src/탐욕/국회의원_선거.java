@@ -18,33 +18,21 @@ import java.util.Arrays;
 public class 국회의원_선거 {
     public int solution(int[] votes) {
         int answer = 0;
-        while (!amIMax(votes)) {
-            buyFromMax(votes);
+        while (true) {
+            int maxIdx = 0;
+            int max = 0;
+            for (int i = 1; i < votes.length; i++) {
+                if (max < votes[i]) {
+                    max = votes[i];
+                    maxIdx = i;
+                }
+            }
+            if(max < votes[0]) break;
+            votes[0]++;
+            votes[maxIdx]--;
             answer++;
         }
         return answer;
-    }
-
-    private void buyFromMax(int[] votes) {
-        int maxIdx = 0;
-        int max = 0;
-        for (int i = 1; i < votes.length; i++) {
-            if(max < votes[i]) {
-                max = votes[i];
-                maxIdx = i;
-            }
-        }
-        votes[maxIdx]--;
-        votes[0]++;
-    }
-
-    private boolean amIMax(int[] votes) {
-        for (int i = 1; i < votes.length; i++) {
-            if(votes[0] <= votes[i]) {
-                return false;
-            }
-        }
-        return true;
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package 정렬;
 
+import java.util.Arrays;
+
 /**
  * 두_수의_합
  *
@@ -16,11 +18,26 @@ package 정렬;
 public class 두_수의_합 {
     public int solution(int[] nums, int x) {
         int answer = 0;
-        for (int i = 0; i < nums.length - 1; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                if(nums[i] + nums[j] == x) {
-                    answer++;
-                }
+        //5, 12, 7, 10, 9, 1, 2, 3, 11
+        //i < j 만족하면서 x인 쌍을 찾아라.
+        //정렬을 하면 우측이 크거나 같은 수잖아.
+        Arrays.sort(nums);
+        int left = 0;
+        int right = nums.length - 1;
+        //합계
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if(sum < x) {
+                left++;
+            } else if (x < sum) {
+                right--;
+            } else {
+                //같으면??
+                //다른 조합도 가능 한지
+                //서로 다른 양의 정수임.
+                answer++;
+                left++;
+                right--;
             }
         }
         return answer;

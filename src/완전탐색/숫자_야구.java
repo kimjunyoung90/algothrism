@@ -23,11 +23,14 @@ public class 숫자_야구 {
 				for (int k = 1; k <= 9; k++) {
 					if (k == j || k == i) continue;
 					int candidate = i * 100 + j * 10 + k;
+					boolean valid = true;
 					for (int[] q : questions) {
-						if (matches(candidate, q[0], q[1], q[2])) {
-							count++;
+						if (!matches(candidate, q[0], q[1], q[2])) {
+							valid = false;
+							break;
 						}
 					}
+					if(valid) count++;
 				}
 			}
 		}

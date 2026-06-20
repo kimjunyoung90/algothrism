@@ -39,10 +39,6 @@ public class 숫자_야구 {
 
 	// 후보가 (질문 number, strike, ball)과 모순되지 않으면 true
 	private boolean matches(int candidate, int number, int strike, int ball) {
-		// TODO(human): candidate와 number를 비교해 strike/ball을 세고,
-		//              인자로 받은 strike·ball과 모두 같은지 반환하세요.
-		//candidate가 정답이라고 가정했을 때
-		//number의 strike, ball 비율이 전달받은것과 동일한지 비교
 		int number1 = number / 100;
 		int number2 = number / 10 % 10;
 		int number3 = number % 10;

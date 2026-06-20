@@ -47,7 +47,7 @@ public class 창고_다각형 {
             int height = columns[i][1];
             rightMax = Math.max(height, rightMax);
             int width = columns[i][0] - columns[i + 1][0];
-            rightSum = rightMax * width;
+            rightSum += rightMax * width;
         }
 
         return leftSum + rightSum + columns[maxHeightIdx][1];

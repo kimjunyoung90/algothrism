@@ -15,25 +15,28 @@ package 완전탐색;
  */
 public class 용감한_용사_진수 {
     public int solution(int[][] soldiers, int k) {
-        // TODO(human): 구현하세요.
-        //K 명의 병사를 이기기 위한 최소 스탯
-        for (int i = 0; i <= 1000000; i++) {
-            for (int j = 0; j <= 1000000; j++) {
-                for (int l = 0; l <= 1000000; l++) {
+        int best = Integer.MAX_VALUE;
+        // 후보 스탯은 병사들의 스탯 값만 보면 충분하다 (그 사이 값은 손해)
+        for (int[] sStat : soldiers) {        // 후보 힘
+            for (int[] aStat : soldiers) {    // 후보 민첩
+                for (int[] iStat : soldiers) {// 후보 지능
+                    int s = sStat[0], a = aStat[1], i = iStat[2];
                     int win = 0;
                     for (int[] soldier : soldiers) {
-                        if(soldier[0] <= i && soldier[1] <= j && soldier[2] <= l) {
+                        if(soldier[0] <= s && soldier[1] <= a && soldier[2] <= i) {
                             win++;
                         }
                     }
-                    if (k <= win) {
-                        System.out.println(i + " " + j + " " + k);
-                        break;
+                    if(k <= win) {
+                        best = Math.min(best, s + a + i);
                     }
+                    // TODO(human): 진수 스탯이 (s, a, i)일 때
+                    //  - 이기는 병사 수를 센다 (세 능력치 모두 >= 병사 능력치)
+                    //  - K명 이상 이기면 합(s+a+i)으로 best를 갱신한다
                 }
             }
         }
-        return 0;
+        return best;
     }
 
     public static void main(String[] args) {

@@ -41,12 +41,12 @@ public class 창고_다각형 {
         }
 
         //maxHeightIdx 기준으로 오른쪽 구간 더하기
-        int rightSum = columns[columns.length - 1][1];
+        int rightSum = 0;
         int rightMax = columns[columns.length - 1][1];
-        for (int i = columns.length - 2; i > maxHeightIdx; i--) {
+        for (int i = columns.length - 1; i > maxHeightIdx; i--) {
             int height = columns[i][1];
             rightMax = Math.max(height, rightMax);
-            int width = columns[i][0] - columns[i + 1][0];
+            int width = columns[i][0] - columns[i - 1][0];
             rightSum += rightMax * width;
         }
 

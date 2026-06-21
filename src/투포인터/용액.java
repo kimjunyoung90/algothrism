@@ -23,7 +23,11 @@ public class 용액 {
         //산성 용액 + 알칼리성 용액 = 0에 가까운 조합
         int leftPointer = 0; //알칼리성 pointer
         int rightPointer = nums.length - 1; //산성 pointer
-        int minGap = 1999999999;
+        //int는 4바이트 = 1바이트 = 8비트 = 2^32
+        //1비트는 부호
+        //양수 표현 범위 = 2^31 -1(0)(약 21억)
+        //음수 표현 범위 = -2^31
+        int minGap = Integer.MAX_VALUE;
         int[] candidate = new int[2];
         while (leftPointer < rightPointer) {
             int mix = nums[leftPointer] + nums[rightPointer];

@@ -13,7 +13,7 @@ public class 구간_합_구하기_4 {
     public int[] solve(int[] nums, int[][] queries) {
         int[] sum = new int[nums.length + 1];
         for (int i = 0; i < nums.length; i++) {
-            sum[i + 1] += nums[i] + sum[i];
+            sum[i + 1] = nums[i] + sum[i];
         }
 
         int[] answer = new int[queries.length];

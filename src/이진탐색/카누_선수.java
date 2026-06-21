@@ -23,6 +23,13 @@ public class 카누_선수 {
 	public int solution(int k, int[][] classes) {
 
 		//왼쪽 반 합을 구하고 = O(n^2) = 1000000
+		//배열은 원시값을 그대로 저장하지만 List는 숫자를 객체형태로 저장한다.
+		//이 과정에서 박싱/언박싱 오버헤드가 발생한다.
+		//메모리 효율성
+		//int = 4byte
+		//Integer 객체는 객체 헤더 + 값 + 참조
+		//배열은 메모리에 연속된 공간
+		//객체는 메모리에 흩어져서 저장
 		int[] leftSum = new int[1000000];
 		int leftSumIdx = 0;
 		for (int i = 0; i < classes[0].length; i++) {

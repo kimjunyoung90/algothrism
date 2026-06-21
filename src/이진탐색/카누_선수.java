@@ -20,33 +20,41 @@ import java.util.stream.Collectors;
 public class 카누_선수 {
     public int solution(int k, int[][] classes) {
 
-        Set<Integer> sumList = new HashSet<>();
+        //왼쪽 반 합을 구하고 = O(n^2) = 1000000
+        Set<Integer> leftSumSet = new HashSet<>();
         for (int a : classes[0]) {
             for (int b : classes[1]) {
-                for (int c : classes[2]) {
-                    for (int d : classes[3]) {
-                        sumList.add(a + b + c + d);
-                    }
-                }
+                leftSumSet.add(a + b);
             }
         }
 
+        //오른쪽 반 합을 구한다.
+        Set<Integer> rightSumSet = new HashSet<>();
+        for (int c : classes[2]) {
+            for (int d : classes[3]) {
+                rightSumSet.add(c + d);
+            }
+        }
+
+
+
         //정렬
-        List<Integer> sorted = sumList.stream().sorted().toList();
+        List<Integer> leftSorted = leftSumSet.stream().sorted().toList();
+        List<Integer> rightSorted = rightSumSet.stream().sorted().toList();
 
         //근사치 구하기
         int minGap = Integer.MAX_VALUE;
         int answer = 0;
-        for (int i = 0; i < sorted.size(); i++) {
-            int candidate = sorted.get(i);
+        for (int i = 0; i < leftSorted.size(); i++) {
+            int candidate = leftSorted.get(i);
             int gap = Math.abs(k - candidate);
             if(gap < minGap) {
                 minGap = gap;
             } else if (gap == minGap){
-                answer = Math.min(candidate, sorted.get(i - 1));
+                answer = Math.min(candidate, leftSorted.get(i - 1));
                 break;
             } else {
-                answer = sorted.get(i - 1);
+                answer = leftSorted.get(i - 1);
                 break;
             }
         }

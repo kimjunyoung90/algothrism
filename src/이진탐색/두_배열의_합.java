@@ -17,12 +17,27 @@ import java.util.Arrays;
  */
 public class 두_배열의_합 {
     public long solve(int T, int[] A, int[] B) {
-        int[] prefixSumA = A.clone();
-        Arrays.parallelPrefix(prefixSumA, Integer::sum);
-        int[] prefixSumB = B.clone();
-        Arrays.parallelPrefix(prefixSumB, Integer::sum);
+        int[] subSumsA = subArraySum(A);
+        int[] subSumsB = subArraySum(B);
 
         return 0;
+    }
+
+    private static int[] subArraySum(int[] arr) {
+        int n = arr.length;
+        int[] prefix = new int[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefix[i + 1] = prefix[i] + arr[i];
+        }
+
+        int[] subSum = new int[n * (n - 1) / 2 + n];
+        int subSumIdx = 0;
+        for (int from = 0; from < n; from++) {
+            for (int to = from + 1; to <= n; to++) {
+                subSum[subSumIdx++] = prefix[to] - prefix[from];
+            }
+        }
+        return subSum;
     }
 
     public static void main(String[] args) {

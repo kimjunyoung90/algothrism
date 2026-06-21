@@ -1,5 +1,7 @@
 package 이진탐색;
 
+import java.util.Arrays;
+
 /**
  * 두_배열의_합 (백준 2143)
  *
@@ -56,7 +58,32 @@ public class 두_배열의_합 {
                 bSubIdx++;
             }
         }
-        return 0;
+
+        //case 구하기(완탐 피하기)
+        //1. 정렬
+        Arrays.sort(subSumA);
+        Arrays.sort(subSumB);
+
+        //2. A 부분 배열 케이스 돌면서 매칭되는 B 부분 배열 합 찾기
+        int answer = 0;
+        for (int i = 0; i < subSumA.length; i++) {
+            int gap = T - subSumA[i];
+            int left = 0;
+            int right = subSumB.length - 1;
+            while (left < right) {
+                int mid = (left + right) / 2;
+                if(subSumB[mid] < gap) {
+                    left = mid + 1;
+                } else if(gap < subSumB[mid]) {
+                    right = mid - 1;
+                } else {
+                    //같으면...?
+                    //중복으로 존재하는 value 체크해야할텐데.
+                    answer++;
+                }
+            }
+        }
+        return answer;
     }
 
     public static void main(String[] args) {

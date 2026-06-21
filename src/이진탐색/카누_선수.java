@@ -1,7 +1,8 @@
 package 이진탐색;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * 카누_선수

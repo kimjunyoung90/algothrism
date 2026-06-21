@@ -54,7 +54,6 @@ public class 카누_선수 {
 				answer = candidate;
 			} else if (gap == minGap) {
 				answer = Math.min(candidate, answer);
-				break;
 			}
 
 			//2. pointer 이동

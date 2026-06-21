@@ -30,7 +30,7 @@ public class 카누_선수 {
 		//Integer 객체는 객체 헤더 + 값 + 참조
 		//배열은 메모리에 연속된 공간
 		//객체는 메모리에 흩어져서 저장
-		int[] leftSum = new int[1000000];
+		int[] leftSum = new int[classes[0].length * classes[0].length];
 		int leftSumIdx = 0;
 		for (int i = 0; i < classes[0].length; i++) {
 			for (int j = 0; j < classes[1].length; j++) {
@@ -40,7 +40,7 @@ public class 카누_선수 {
 		}
 
 		//오른쪽 반 합을 구한다.
-		int[] rightSum = new int[1000000];
+		int[] rightSum = new int[classes[0].length * classes[0].length];
 		int rightSumIdx = 0;
 		for (int i = 0; i < classes[2].length; i++) {
 			for (int j = 0; j < classes[3].length; j++) {

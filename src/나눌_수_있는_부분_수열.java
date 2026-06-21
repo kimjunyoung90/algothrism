@@ -24,7 +24,7 @@ public class 나눌_수_있는_부분_수열 {
 		}
 
 		//나머지가 같은 수 구하기
-		return Arrays.stream(divide).filter(i -> i > 1).reduce(0, (acc, i) -> i * (i - 1) / 2 + acc);
+		return Arrays.stream(divide).reduce(0, (acc, i) -> i * (i - 1) / 2 + acc);
 	}
 
 	public static void main(String[] args) {

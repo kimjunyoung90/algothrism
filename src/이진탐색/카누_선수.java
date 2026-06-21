@@ -28,9 +28,9 @@ public class 카누_선수 {
         //순회하면서 몸무게 합 구하기
         Set<Integer> sumList = new HashSet<>();
         for (int a : classes[0]) {
-            for (int b : classes[0]) {
-                for (int c : classes[0]) {
-                    for (int d : classes[1]) {
+            for (int b : classes[1]) {
+                for (int c : classes[2]) {
+                    for (int d : classes[3]) {
                         sumList.add(a + b + c + d);
                     }
                 }

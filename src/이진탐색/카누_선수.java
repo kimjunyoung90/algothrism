@@ -19,17 +19,7 @@ import java.util.stream.Collectors;
  */
 public class 카누_선수 {
     public int solution(int k, int[][] classes) {
-        // TODO(human): 구현하세요.
-        //4개의 반에서 k에 가장 근사치인 몸무게 조합을 구하라.
-        //1반에서 1번 선택 시
-        //2반에서 1번 선택 시
-        //3반에서 1번 선택 시
-        //4반에서 1번 선택 시
-        //순회하면서 몸무게 합 구하기
 
-        //시작 복잡도 O(n^4)
-        //n 최대 = 1000
-        //최대 연산수는 1000^4 = 1000000000000 = 1조
         Set<Integer> sumList = new HashSet<>();
         for (int a : classes[0]) {
             for (int b : classes[1]) {

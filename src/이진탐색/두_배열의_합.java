@@ -1,0 +1,63 @@
+package 이진탐색;
+
+/**
+ * 두_배열의_합 (백준 2143)
+ *
+ * 두 배열 A, B가 주어졌을 때, A의 부 배열 합 + B의 부 배열 합 = T가 되는
+ * 부 배열 쌍의 개수를 구한다.
+ *
+ * 제약조건:
+ * - -1,000,000,000 ≤ T ≤ 1,000,000,000
+ * - 1 ≤ n, m ≤ 1,000
+ * - 각 원소의 절댓값은 1,000,000 이하
+ *
+ * @link https://takjoon.takijk.xyz/problems/12399
+ */
+public class 두_배열의_합 {
+    public long solve(int T, int[] A, int[] B) {
+        // A의 부 배열의 합에 B의 부 배열의 합을 더해서 T가 되는 모든 부 배열 쌍의 개수
+        // A 부 배열의 합
+        // B 부 배열의 합
+        int[] aSum = new int[A.length];
+        int[] bSum = new int[B.length];
+
+        aSum[0] = A[0];
+        for (int i = 1; i < A.length; i++) {
+            aSum[i] = aSum[i - 1] + A[i];
+        }
+
+        bSum[0] = B[0];
+        for (int i = 1; i < B.length; i++) {
+            bSum[i] = bSum[i - 1] + B[i];
+        }
+
+        //두 부 배열 경우의 수를 다 구한다음 pointer로
+        //실제 부 배열의 개수가 n * (n + 1) / 2라고??
+        int[] subSumA = new int[A.length * (A.length - 1) / 2 + A.length];
+        int aSubIdx = 0;
+        for (int i = 0; i < aSum.length; i++) {
+            for (int j = i; j < aSum.length; j++) {
+                subSumA[aSubIdx] = aSum[j] - aSum[i];
+                aSubIdx++;
+            }
+        }
+
+        int[] subSumB = new int[B.length * (B.length - 1) / 2 + B.length];
+        int bSubIdx = 0;
+        for (int i = 0; i < bSum.length; i++) {
+            for (int j = i; j < bSum.length; j++) {
+                subSumB[bSubIdx] = bSum[j] - bSum[i];
+                bSubIdx++;
+            }
+        }
+        return 0;
+    }
+
+    public static void main(String[] args) {
+        int T = 5;
+        int[] A = {1, 3, 1, 2};
+        int[] B = {1, 3, 2};
+
+        System.out.println(new 두_배열의_합().solve(T, A, B)); // 기대값: 7
+    }
+}

@@ -36,12 +36,8 @@ public class 용액 {
             }
 
             if(0 < mix) {
-                //rightPointer가 알칼리 용액을 가리키진 않는지?
-                if(nums[rightPointer - 1] < 0) break;
                 rightPointer--;
             } else if(mix < 0) {
-                //leftPointer가 산성 용액을 가리키진 않는지?
-                if(0 < nums[leftPointer + 1]) break;
                 leftPointer++;
             } else {
                 //같은 경우 더 0에 수렵한 조합은 없는지
@@ -49,7 +45,6 @@ public class 용액 {
                 // -10, 10 = 0
                 //각 후보 용액들의 값은 겹침이 없음
                 //pointer 하나씩 가운데에 가깝게 이동
-                if(0 < nums[leftPointer + 1] || nums[rightPointer - 1] < 0) break;
                 leftPointer++;
                 rightPointer--;
             }

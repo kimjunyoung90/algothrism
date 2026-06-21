@@ -21,19 +21,50 @@ public class 두_배열의_합 {
         int[] subSumsB = subArraySum(B);
 
         //정렬
-        Arrays.sort(subSumsA);
+        Arrays.sort(subSumsB);
 
         int answer = 0;
-        for (int i = 0; i < subSumsA.length; i++) {
-            int gap = T - subSumsA[i];
-            answer += countEquals(gap, subSumsB);
-        }
+		for (int j : subSumsA) {
+			int gap = T - j;
+			answer += countEquals(gap, subSumsB);
+		}
 
         return answer;
     }
 
     private int countEquals(int gap, int[] subSumsB) {
-        return 0;
+        return upperBound(subSumsB, gap) - lowerBound(subSumsB, gap);
+    }
+
+    private int lowerBound(int[] sorted, int target) {
+        int left = 0;
+        int right = sorted.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+
+            if(sorted[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+
+        return left;
+    }
+
+    private int upperBound(int[] sorted, int target) {
+        int left = 0;
+        int right = sorted.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            //동등 연산이 필요한 이유는 같아도 우측에 같은 값이 더 있을 수 있음
+            if(sorted[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
     }
 
     private static int[] subArraySum(int[] arr) {

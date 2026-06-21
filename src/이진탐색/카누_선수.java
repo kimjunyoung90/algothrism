@@ -1,5 +1,6 @@
 package 이진탐색;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -22,31 +23,36 @@ public class 카누_선수 {
 	public int solution(int k, int[][] classes) {
 
 		//왼쪽 반 합을 구하고 = O(n^2) = 1000000
-		Set<Integer> leftSumSet = new HashSet<>();
-		for (int a : classes[0]) {
-			for (int b : classes[1]) {
-				leftSumSet.add(a + b);
+		int[] leftSum = new int[1000000];
+		int leftSumIdx = 0;
+		for (int i = 0; i < classes[0].length; i++) {
+			for (int j = 0; j < classes[1].length; j++) {
+				leftSum[leftSumIdx] = classes[0][i] + classes[1][j];
+				leftSumIdx++;
 			}
 		}
 
 		//오른쪽 반 합을 구한다.
-		Set<Integer> rightSumSet = new HashSet<>();
-		for (int c : classes[2]) {
-			for (int d : classes[3]) {
-				rightSumSet.add(c + d);
+		int[] rightSum = new int[1000000];
+		int rightSumIdx = 0;
+		for (int i = 0; i < classes[2].length; i++) {
+			for (int j = 0; j < classes[3].length; j++) {
+				rightSum[rightSumIdx] = classes[2][i] + classes[3][j];
+				rightSumIdx++;
 			}
 		}
 
 		//정렬
-		List<Integer> leftSorted = leftSumSet.stream().sorted().toList();
-		List<Integer> rightSorted = rightSumSet.stream().sorted().toList();
+		Arrays.sort(leftSum);
+		Arrays.sort(rightSum);
 
 		//근사치 구하기
-		int leftPointer = 0, rightPointer = rightSorted.size() - 1;
+		int leftPointer = 0;
+		int rightPointer = rightSum.length - 1;
 		int minGap = Integer.MAX_VALUE;
 		int answer = 0;
-		while (leftPointer < leftSorted.size() && rightPointer >= 0) {
-			int candidate = leftSorted.get(leftPointer) + rightSorted.get(rightPointer);
+		while (leftPointer < leftSum.length && rightPointer >= 0) {
+			int candidate = leftSum[leftPointer] + rightSum[rightPointer];
 			int gap = Math.abs(k - candidate);
 
 			//1. gap 갱신

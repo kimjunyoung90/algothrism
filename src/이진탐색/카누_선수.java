@@ -36,7 +36,6 @@ public class 카누_선수 {
 			}
 		}
 
-
 		//정렬
 		List<Integer> leftSorted = leftSumSet.stream().sorted().toList();
 		List<Integer> rightSorted = rightSumSet.stream().sorted().toList();

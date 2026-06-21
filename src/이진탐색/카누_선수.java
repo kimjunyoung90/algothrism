@@ -52,12 +52,9 @@ public class 카누_선수 {
 			//1. gap 갱신
 			if (gap < minGap) {
 				minGap = gap;
-
+				answer = candidate;
 			} else if (gap == minGap) {
-				answer = Math.min(candidate, leftSorted.get(i - 1));
-				break;
-			} else {
-				answer = leftSorted.get(i - 1);
+				answer = Math.min(candidate, answer);
 				break;
 			}
 

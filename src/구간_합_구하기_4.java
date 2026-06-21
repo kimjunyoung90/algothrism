@@ -11,10 +11,6 @@
  */
 public class 구간_합_구하기_4 {
     public int[] solve(int[] nums, int[][] queries) {
-        // TODO(human): 구현하세요.
-        //누적합 구한다음에 빼면 되겠구나.
-        //5, 4, 3, 2, 1
-        //5, 9, 12, 14, 15
         int[] sum = new int[nums.length + 1];
         for (int i = 0; i < nums.length; i++) {
             sum[i + 1] += nums[i] + sum[i];

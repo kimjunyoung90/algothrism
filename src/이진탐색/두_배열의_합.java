@@ -100,7 +100,7 @@ public class 두_배열의_합 {
                 }
             }
             int rightBoundary = right;
-            answer = rightBoundary - leftBoundary;
+            answer += rightBoundary - leftBoundary;
         }
         return answer;
     }

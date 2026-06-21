@@ -26,6 +26,10 @@ public class 카누_선수 {
         //3반에서 1번 선택 시
         //4반에서 1번 선택 시
         //순회하면서 몸무게 합 구하기
+
+        //시작 복잡도 O(n^4)
+        //n 최대 = 1000
+        //최대 연산수는 1000^4 = 1000000000000 = 1조
         Set<Integer> sumList = new HashSet<>();
         for (int a : classes[0]) {
             for (int b : classes[1]) {

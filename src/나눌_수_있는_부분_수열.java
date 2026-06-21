@@ -25,7 +25,7 @@ public class 나눌_수_있는_부분_수열 {
 		//출발점이 있어야한다....
 		divide[0]++;
 		for (long j : sum) {
-			divide[(int) j % d]++;
+			divide[(int) (j % d)]++;
 		}
 
 		//나머지가 같은 수 구하기

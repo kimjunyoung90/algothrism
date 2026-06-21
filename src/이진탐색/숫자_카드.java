@@ -22,30 +22,9 @@ public class 숫자_카드 {
         Arrays.sort(cards);
         for (int i = 0; i < m; i++) {
             int query = queries[i];
-            if(hasCard(query, cards)) {
-                answer.append("1");
-            } else {
-                answer.append("0");
-            }
-            answer.append(" ");
+            answer.append(Arrays.binarySearch(cards, query) >= 0 ? 1 : 0).append(" ");
         }
         return answer.toString().trim();
-    }
-
-    private static boolean hasCard(int target, int[] cards) {
-        int left = 0;
-        int right = cards.length - 1;
-		while (left <= right) {
-            int mid = (left + right) / 2;
-            if(cards[mid] < target) {
-                left = mid + 1;
-            } else if(target < cards[mid]) {
-                right = mid - 1;
-            } else {
-                return true;
-            }
-        }
-        return false;
     }
 
     public static void main(String[] args) {

@@ -37,7 +37,13 @@ public class 두_배열의_합 {
         int aSubIdx = 0;
         for (int i = 0; i < aSum.length; i++) {
             for (int j = i; j < aSum.length; j++) {
-                subSumA[aSubIdx] = aSum[j] - aSum[i];
+                //i ~ j까지(i 포함)
+                // 1 ~ 2
+                //1, 2, 3
+                //1, 3, 6
+                // 6 - 3 = 3
+                // 2 + 3 = 5
+                subSumA[aSubIdx] = aSum[j] - aSum[i] + A[i];
                 aSubIdx++;
             }
         }
@@ -46,7 +52,7 @@ public class 두_배열의_합 {
         int bSubIdx = 0;
         for (int i = 0; i < bSum.length; i++) {
             for (int j = i; j < bSum.length; j++) {
-                subSumB[bSubIdx] = bSum[j] - bSum[i];
+                subSumB[bSubIdx] = bSum[j] - bSum[i] + B[i];
                 bSubIdx++;
             }
         }

@@ -23,14 +23,17 @@ public class 용액 {
         //산성 용액 + 알칼리성 용액 = 0에 가까운 조합
         int leftPointer = 0; //알칼리성 pointer
         int rightPointer = nums.length - 1; //산성 pointer
+        int minGap = 999999999;
+        int[] candidate = new int[2];
         while (leftPointer < rightPointer) {
             int mix = nums[leftPointer] + nums[rightPointer];
-            //mix가 0보다 크면 더 약한 산성 용액을 섞어야함
-            //mix가 0보다 작으면 더 센 알칼리 용액을 섞어야 함
-            //pointer 이동 시 무분별하게 이동하면 안됨.
-            //산성 + 알칼리 용액이 동일한 배열에 있기 때문에
-            //pointer가 서로의 영역을 침범하진 않는지 확인해야함
-            //이동하기 전에 확인을 해야함
+
+            //mix 절대값이 minGap 보다 작으면 절대값을 갱신해야함
+            if(Math.abs(mix) <= minGap) {
+                candidate[0] = nums[leftPointer];
+                candidate[1] = nums[rightPointer];
+            }
+
             if(0 < mix) {
                 //rightPointer가 알칼리 용액을 가리키진 않는지?
                 if(nums[rightPointer - 1] < 0) break;
@@ -50,7 +53,7 @@ public class 용액 {
                 rightPointer--;
             }
         }
-        return new int[]{nums[leftPointer], nums[rightPointer]};
+        return candidate;
     }
 
     public static void main(String[] args) {

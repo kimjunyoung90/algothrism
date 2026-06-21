@@ -78,8 +78,9 @@ public class 두_배열의_합 {
                     right = mid - 1;
                 } else {
                     //같으면...?
-                    //중복으로 존재하는 value 체크해야할텐데.
+                    //중복으로 존재하는 value 체크해야할텐데. = left만 이동
                     answer++;
+                    left++;
                 }
             }
         }

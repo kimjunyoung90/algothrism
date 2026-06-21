@@ -20,6 +20,19 @@ public class 두_배열의_합 {
         int[] subSumsA = subArraySum(A);
         int[] subSumsB = subArraySum(B);
 
+        //정렬
+        Arrays.sort(subSumsA);
+
+        int answer = 0;
+        for (int i = 0; i < subSumsA.length; i++) {
+            int gap = T - subSumsA[i];
+            answer += countEquals(gap, subSumsB);
+        }
+
+        return answer;
+    }
+
+    private int countEquals(int gap, int[] subSumsB) {
         return 0;
     }
 

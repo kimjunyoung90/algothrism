@@ -83,6 +83,24 @@ public class 두_배열의_합 {
                 }
             }
             //계산이 끝난 후 left가 정답이다.
+            int leftBoundary = left;
+
+            //우측 경계선 찾기
+            left = 0;
+            right = subSumB.length - 1;
+            while (left <= right) {
+                int mid = (left + right) / 2;
+                //gap이 크면 왼쪽에 정답이 있을것이다.
+                if(gap < subSumB[mid]) {
+                    right = mid - 1;
+                } else {
+                    //gap이 작거나 같으면 으론쪽에 정답이 있다.
+                    //같아도 오른쪽에 정답이 더 있을 수 있다.
+                    left = mid + 1;
+                }
+            }
+            int rightBoundary = right;
+            answer = rightBoundary - leftBoundary;
         }
         return answer;
     }

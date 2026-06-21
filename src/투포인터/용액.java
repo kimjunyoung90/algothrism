@@ -35,7 +35,7 @@ public class 용액 {
             //mix 절대값이 minGap 보다 작으면 절대값을 갱신해야함
             int gap = Math.abs(mix);
             if(gap <= minGap) {
-                minGap = Math.min(gap, minGap);
+                minGap = gap;
                 candidate[0] = nums[leftPointer];
                 candidate[1] = nums[rightPointer];
             }

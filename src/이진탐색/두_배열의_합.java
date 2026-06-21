@@ -68,21 +68,21 @@ public class 두_배열의_합 {
         int answer = 0;
         for (int i = 0; i < subSumA.length; i++) {
             int gap = T - subSumA[i];
+
+            //왼쪽 경계선 찾기
             int left = 0;
             int right = subSumB.length - 1;
-            while (left < right) {
+            while (left <= right) {
                 int mid = (left + right) / 2;
-                if(subSumB[mid] < gap) {
-                    left = mid + 1;
-                } else if(gap < subSumB[mid]) {
+                //gap이 크거나 같으면 왼쪽에 정답이 있을것이다.
+                if(gap <= subSumB[mid]) {
                     right = mid - 1;
                 } else {
-                    //같으면...?
-                    //중복으로 존재하는 value 체크해야할텐데. = left만 이동
-                    answer++;
-                    left++;
+                    //gap이 작으면 으론쪽에 정답이 있다.
+                    left = mid + 1;
                 }
             }
+            //계산이 끝난 후 left가 정답이다.
         }
         return answer;
     }

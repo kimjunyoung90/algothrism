@@ -15,7 +15,7 @@ import java.util.Arrays;
 public class 나눌_수_있는_부분_수열 {
 	public long solve(int d, int[] arr) {
 		//핵심 = 두 수를 d로 나눈 나머지가 같다. = 두 수의 차는 d의 배수다.
-		int[] sum = new int[arr.length];
+		long[] sum = new long[arr.length];
 		sum[0] = arr[0];
 		for (int i = 1; i < arr.length; i++) {
 			sum[i] = arr[i] + sum[i - 1];
@@ -24,8 +24,8 @@ public class 나눌_수_있는_부분_수열 {
 		int[] divide = new int[d];
 		//출발점이 있어야한다....
 		divide[0]++;
-		for (int j : sum) {
-			divide[j % d]++;
+		for (long j : sum) {
+			divide[(int) j % d]++;
 		}
 
 		//나머지가 같은 수 구하기

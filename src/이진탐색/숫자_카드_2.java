@@ -34,12 +34,12 @@ public class 숫자_카드_2 {
         return sb.toString().trim();
     }
 
-    private int lowerBounds(int search, int[] cards) {
+    private int lowerBounds(int query, int[] cards) {
         int left = 0;
         int right = cards.length - 1;
         while (left <= right) {
             int mid = (left + right) / 2;
-            if(search <= cards[mid]) {
+            if(query <= cards[mid]) {
                 right = mid - 1;
             } else {
                 left = mid + 1;
@@ -48,12 +48,12 @@ public class 숫자_카드_2 {
         return left;
     }
 
-    private int upperBounds(int search, int[] cards) {
+    private int upperBounds(int query, int[] cards) {
         int left = 0;
-        int right = cards.length;
+        int right = cards.length; //미포함
         while (left < right) {
             int mid = (left + right) / 2;
-            if(search <= cards[mid]) {
+            if(cards[mid] <= query) {
                 left = mid + 1;
             } else {
                 right = mid;

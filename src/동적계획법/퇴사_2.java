@@ -32,6 +32,13 @@ public class 퇴사_2 {
         //일단 내 생각은 각 날(i)을 기준으로 최대 수익을 더하면 그게 최대 수익 날이야.
 
         //그럼 각 날의 최대 수익은 어떻게 구할까?
+        //선택지가 2가지
+        //i날에 상담을 하던지
+        //i날에 상담을 하지 않고 더 수익이 좋은 날을 상담을 하던지
+        //왜냐면 i날에 상담을 하면 다른 날에 못할 수도 있으니(전날, 또는 다음날)
+        for (int day = N; 1 <= day; day--) {
+            profits[day] = Math.max(P[day] + profits[day + T[day]], profits[day + 1]);
+        }
 
         return Arrays.stream(profits).max().getAsInt();
     }

@@ -22,7 +22,8 @@ public class 퇴사_2 {
         // T = 상담을 끝마치는데 걸리는 시간
         // P = 상담으로 얻을 수 있는 수익
         // 각 날짜에 상담을 함으로써 얻을 수 있는 최대 수익을 구해본다.
-        int[] profits = new int[N + 1];
+        // TODO(human): profits 배열 크기를 N+1일(퇴사일) 칸까지 담도록 정하기
+        int[] profits = new int[N + 2];
         //거꾸로
         //0, 1, 2, 3, 4, 5, 6
         //3, 5, 1, 1, 2, 4, 2
@@ -37,7 +38,11 @@ public class 퇴사_2 {
         //i날에 상담을 하지 않고 더 수익이 좋은 날을 상담을 하던지
         //왜냐면 i날에 상담을 하면 다른 날에 못할 수도 있으니(전날, 또는 다음날)
         for (int day = N; 1 <= day; day--) {
-            profits[day] = Math.max(P[day] + profits[day + T[day]], profits[day + 1]);
+            if(N + 1< day + T[day]) {
+                profits[day] = profits[day + 1];
+            } else {
+                profits[day] = Math.max(P[day] + profits[day + T[day]], profits[day + 1]);
+            }
         }
 
         return Arrays.stream(profits).max().getAsInt();

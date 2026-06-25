@@ -33,29 +33,6 @@ public class 퇴사_2 {
 
         //그럼 각 날의 최대 수익은 어떻게 구할까?
 
-
-        //N = 10
-        //i가 9 = 10일
-        //10일날 1루가 걸리는 일 11일이 되는 날까지
-        for (int day = N; 0 <= day; day--) {
-            //day 날 상담을 하면 얻을 수 있는 수익
-            //T[day] = 상담하는데 걸리는 시간 day 날의 상담이 N보다 작
-            int profit = 0;
-            //마지막 날(N + 1) 전에는 끝나야함
-            //10일날 하루 걸리는 일은? 가능
-            //10일 + 1일 <= N + 1이하로 가능
-            if(day + T[day] <= N + 1) {
-                profit += P[day];
-            }
-
-            //day 날 시작한 상담이 끝난 다음날 얻을 수 있는 최대 수익
-            //day + T[day]
-            if(day + T[day] <= N) {
-                profit += profits[day + T[day]];
-            }
-
-            profits[day] = profit;
-        }
         return Arrays.stream(profits).max().getAsInt();
     }
 

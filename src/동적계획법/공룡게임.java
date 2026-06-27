@@ -39,22 +39,21 @@ public class 공룡게임 {
     }
 
     //i지점에서
-    private int searchRoutes(int currentHeight, int adjHeight, int adjCount, int depth, int dest, boolean heightTwoAppeared) {
+    private int searchRoutes(int currentHeight, int adjHeight, int adjCount, int depth, int dest, boolean h2Existed) {
 
         if(adjCount >= 3) return 0;
         if(currentHeight + adjHeight >= 4) return 0;
 
         if(depth == dest) {
 
-            if(!heightTwoAppeared) return 0;
+            if(!h2Existed) return 0;
 
             return 1;
         }
 
         if(numberOfCases[depth][currentHeight] != -1) return numberOfCases[depth][currentHeight];
-
-        int aCase = searchRoutes(0, 0, 0, depth + 1, dest, heightTwoAppeared);
-        int bCase = searchRoutes(1, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, heightTwoAppeared);
+        int aCase = searchRoutes(0, 0, 0, depth + 1, dest, h2Existed);
+        int bCase = searchRoutes(1, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, h2Existed);
         int cCase = searchRoutes(2, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, true);
 
         numberOfCases[depth][currentHeight] = aCase + bCase + cCase;

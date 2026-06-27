@@ -1,5 +1,7 @@
 package 동적계획법;
 
+import java.util.Arrays;
+
 /**
  * 공룡게임
  *
@@ -19,6 +21,7 @@ package 동적계획법;
  * @link https://takjoon.takijk.xyz/problems/11425
  */
 public class 공룡게임 {
+    private static int[][] numberOfCases;
     public long solve(int N) {
         // 깰 수 있는 맵의 가지수를 구해라.
         // 선인장 높이 1 or 2
@@ -28,11 +31,17 @@ public class 공룡게임 {
 
         //길이가 N인 경우 조건을 만족하는 맵의 가지수를 구하라.
         //각 위치에 0일지, 1일지, 2일지 판단하면 되잖아??
+        numberOfCases = new int[N + 1][3];
+        for (int[] nc : numberOfCases) {
+            Arrays.fill(nc, -1);
+        }
         return searchRoutes(0, 0, 0, 1, N, false);
     }
 
     //i지점에서
     private int searchRoutes(int currentHeight, int adjHeight, int adjCount, int depth, int dest, boolean heightTwoAppeared) {
+
+        if(numberOfCases[depth][currentHeight] != -1) return numberOfCases[depth][currentHeight];
 
         if(adjCount >= 3) return 0;
         if(currentHeight + adjHeight >= 4) return 0;
@@ -44,10 +53,13 @@ public class 공룡게임 {
             return 1;
         }
 
-        //다음 것 탐색
-        return searchRoutes(0, 0, 0, depth + 1, dest, heightTwoAppeared)
-        + searchRoutes(1, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, heightTwoAppeared)
-        + searchRoutes(2, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, true);
+        int aCase = searchRoutes(0, 0, 0, depth + 1, dest, heightTwoAppeared);
+        int bCase = searchRoutes(1, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, heightTwoAppeared);
+        int cCase = searchRoutes(2, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, true);
+
+        numberOfCases[depth][currentHeight] = aCase + bCase + cCase;
+
+        return aCase + bCase + cCase;
     }
 
     public static void main(String[] args) {

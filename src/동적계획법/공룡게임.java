@@ -33,8 +33,6 @@ public class 공룡게임 {
 
     //i지점에서
     private int searchRoutes(int currentHeight, int adjHeight, int adjCount, int depth, int dest, boolean heightTwoAppeared) {
-        //0, 0, 0, 1, 3, false
-
 
         if(adjCount >= 3) return 0;
         if(currentHeight + adjHeight >= 4) return 0;

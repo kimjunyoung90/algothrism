@@ -21,7 +21,7 @@ import java.util.Arrays;
  * @link https://takjoon.takijk.xyz/problems/11425
  */
 public class 공룡게임 {
-	private static int[][][] numberOfCases;
+	private static int[][][][] numberOfCases;
 
 	public long solve(int N) {
 		// 깰 수 있는 맵의 가지수를 구해라.
@@ -32,35 +32,34 @@ public class 공룡게임 {
 
 		//길이가 N인 경우 조건을 만족하는 맵의 가지수를 구하라.
 		//각 위치에 0일지, 1일지, 2일지 판단하면 되잖아??
-		numberOfCases = new int[N + 1][3][2];
-		for (int[][] nc : numberOfCases) {
-			for (int[] n : nc) {
-				Arrays.fill(n, -1);
+		numberOfCases = new int[N + 1][3][3][2];
+		for (int[][][] currentHeight : numberOfCases) {
+			for (int[][] prevHeight : currentHeight) {
+				for (int[] h2Selected : prevHeight) {
+					Arrays.fill(h2Selected, -1);
+				}
 			}
 		}
-		return searchRoutes(0, 0, 0, 1, N, 0);
+		return searchRoutes(0, 0, 1, N, 0);
 	}
 
 	//i지점에서
-	private int searchRoutes(int currentHeight, int adjHeight, int adjCount, int depth, int dest, int h2Existed) {
+	private int searchRoutes(int currentHeight, int prevHeight, int depth, int dest, int h2Existed) {
 
-		if (adjCount >= 3) return 0;
-		if (currentHeight + adjHeight >= 4) return 0;
+		if (currentHeight + prevHeight >= 4) return 0;
 
 		if (depth == dest) {
-
 			if (h2Existed != 1) return 0;
-
 			return 1;
 		}
 
-		if (numberOfCases[depth][currentHeight][h2Existed] != -1) return numberOfCases[depth][currentHeight][h2Existed];
+		if (numberOfCases[depth][currentHeight][prevHeight][h2Existed] != -1) return numberOfCases[depth][currentHeight][prevHeight][h2Existed];
 
-		int aCase = searchRoutes(0, 0, 0, depth + 1, dest, h2Existed);
-		int bCase = searchRoutes(1, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, h2Existed);
-		int cCase = searchRoutes(2, adjHeight + currentHeight, adjCount + 1, depth + 1, dest, 1);
+		int aCase = searchRoutes(0, currentHeight,  depth + 1, dest, h2Existed);
+		int bCase = currentHeight >= 1 && prevHeight >= 1 ? 0 : searchRoutes(1, currentHeight, depth + 1, dest, h2Existed);
+		int cCase = currentHeight >= 1 && prevHeight >= 1 ? 0 : searchRoutes(2, currentHeight, depth + 1, dest, 1);
 
-		numberOfCases[depth][currentHeight][h2Existed] = aCase + bCase + cCase;
+		numberOfCases[depth][currentHeight][prevHeight][h2Existed] = aCase + bCase + cCase;
 
 		return aCase + bCase + cCase;
 	}

@@ -59,7 +59,7 @@ public class 공룡게임 {
 		int bCase = currentHeight >= 1 && prevHeight >= 1 ? 0 : searchRoutes(1, currentHeight, depth + 1, dest, h2Existed);
 		int cCase = currentHeight >= 1 && prevHeight >= 1 ? 0 : searchRoutes(2, currentHeight, depth + 1, dest, 1);
 
-		numberOfCases[depth][currentHeight][prevHeight][h2Existed] = aCase + bCase + cCase;
+		numberOfCases[depth][currentHeight][prevHeight][h2Existed] = (aCase + bCase + cCase) % 1000000007;
 
 		return aCase + bCase + cCase;
 	}

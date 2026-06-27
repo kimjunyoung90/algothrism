@@ -65,9 +65,11 @@ public class 공룡게임 {
 		//위치, 현재 높이, 이전 높이, h2 선택 여부 에 따라 미리 계산된 경우의 수
 		if(dp[depth][currentHeight][prevHeight][h2Existed] != -1) return dp[depth][currentHeight][prevHeight][h2Existed];
 
+		boolean isAdjacentCactus = currentHeight >= 1 && prevHeight >= 1;
+
 		int h0Case = countWays(0, currentHeight, h2Existed, depth + 1, end);
-		int h1Case = currentHeight >= 1 && prevHeight >= 1 ? 0 : countWays(1, currentHeight, h2Existed, depth + 1, end);
-		int h2Case = currentHeight >= 1 && prevHeight >= 1 ? 0 : countWays(2, currentHeight, 1, depth + 1, end);
+		int h1Case = isAdjacentCactus ? 0 : countWays(1, currentHeight, h2Existed, depth + 1, end);
+		int h2Case = isAdjacentCactus ? 0 : countWays(2, currentHeight, 1, depth + 1, end);
 
 		int total = (h0Case + h1Case + h2Case) % 1000000007;
 

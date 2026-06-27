@@ -49,7 +49,7 @@ public class 공룡게임 {
 
 		if (depth == dest) {
 
-			if (h2Existed != 0) return 0;
+			if (h2Existed != 1) return 0;
 
 			return 1;
 		}

@@ -40,8 +40,7 @@ public class 공룡게임 {
 				}
 			}
 		}
-		countWays(1, 0, 0, 1, N);
-        return 0;
+		return countWays(0, 0, 0, 1, N);
     }
 
 	private int countWays(int currentHeight, int prevHeight, int h2Existed, int depth, int end) {
@@ -70,7 +69,7 @@ public class 공룡게임 {
 		int h1Case = currentHeight >= 1 && prevHeight >= 1 ? 0 : countWays(1, currentHeight, h2Existed, depth + 1, end);
 		int h2Case = currentHeight >= 1 && prevHeight >= 1 ? 0 : countWays(2, currentHeight, 1, depth + 1, end);
 
-		int total = h0Case + h1Case + h2Case;
+		int total = (h0Case + h1Case + h2Case) % 1000000007;
 
 		dp[depth][currentHeight][prevHeight][h2Existed] = total;
 

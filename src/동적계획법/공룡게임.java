@@ -71,7 +71,7 @@ public class 공룡게임 {
 		int h1Case = isAdjacentCactus ? 0 : countWays(1, currentHeight, h2Existed, depth + 1, end);
 		int h2Case = isAdjacentCactus ? 0 : countWays(2, currentHeight, 1, depth + 1, end);
 
-		int total = (int)((long) h0Case + h1Case + h2Case) % 1000000007;
+		int total = (int)(((long) h0Case + h1Case + h2Case) % 1000000007);
 
 		dp[depth][currentHeight][prevHeight][h2Existed] = total;
 

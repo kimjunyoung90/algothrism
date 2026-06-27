@@ -18,16 +18,19 @@ import java.util.Arrays;
  */
 public class 평범한_배낭 {
 	public int solution(int N, int K, int[][] items) {
-		// values[w] = 무게 한도가 w일 때 담을 수 있는 최대 가치
+		// TODO : 배낭에 넣을 수 있는 물건들의 가치의 최댓값을 구하라
+		//무게별 최대값
 		int[] values = new int[K + 1];
+
 		for (int[] item : items) {
 			int weight = item[0];
 			int value = item[1];
-			for (int i = K; weight <= i; i--) {
+
+			for (int i = K; weight <= i ; i--) {
 				values[i] = Math.max(values[i], value + values[i - weight]);
 			}
 		}
-		return values[K];
+		return Arrays.stream(values).max().getAsInt();
 	}
 
 	public static void main(String[] args) {

@@ -22,7 +22,15 @@ public class 출근_경로 {
 		// 상근이는 교차로 (1, 1)에 살고 있고 교차로 (w, h)에 있는 회사에 다님.
 		// w, h가 목적지구나.
 
-		memo = new int[w][h][2][2];
+		memo = new int[h + 1][w + 1][2][2];
+		for (int[][][] a : memo) {
+			for (int[][] b : a) {
+				for (int[] c : b) {
+					c[0] = -1;
+					c[1] = -1;
+				}
+			}
+		}
 		return (move(2, 1, 0, false, h, w) + move(1, 2, 1, false, h, w)) % 100000;
 	}
 
@@ -38,7 +46,7 @@ public class 출근_경로 {
 		boolean fromX = dir == 0;
 		boolean fromY = dir == 1;
 
-		if(memo[x][y][dir][justTurned ? 0 : 1] != 0) return memo[x][y][dir][justTurned ? 0 : 1];
+		if(memo[x][y][dir][justTurned ? 0 : 1] != -1) return memo[x][y][dir][justTurned ? 0 : 1];
 
 		//1. 동쪽으로 이동(x에서 y로 방향 전환했으면 이동 불가)
 		int aCase = justTurned && fromY ? 0 : move(x + 1, y, 0, fromY, destX, destY);

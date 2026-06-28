@@ -49,7 +49,7 @@ public class 출근_경로 {
 
 		//2. 북쪽으로 이동(y에서 x로 변향전환 했으면 이동 불가)
 		int bCase = intersection && prevXMoved ? 0 : move(prevX, prevY, xPosition, yPosition, xPosition, yPosition + 1, destX, destY);
-		return aCase + bCase;
+		return (aCase + bCase) % 100000;
 	}
 
 	public static void main(String[] args) {

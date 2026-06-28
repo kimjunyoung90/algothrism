@@ -28,7 +28,7 @@ public class 출근_경로 {
 		// i, j 에 있을 때 직전에 교차로를 돌은건지 아닌지
 
 		// wᵢ, hᵢ 에서
-		return move(1, 1, 1, false, h, w);
+		return(move(2, 1, 0, false, h, w) + move(1, 2, 1, false, h, w)) % 100000 ;
 	}
 
 	private int move(int x, int y, int dir, boolean justTurned, int destX, int destY) {
@@ -48,7 +48,7 @@ public class 출근_경로 {
 		//2. 북쪽으로 이동(y에서 x로 변향전환 했으면 이동 불가)
 		int bCase = justTurned && fromX ? 0 : move( x, y + 1, 1, fromX, destX, destY);
 
-		return (aCase + bCase) % 100000;
+		return (aCase + bCase);
 	}
 
 	public static void main(String[] args) {

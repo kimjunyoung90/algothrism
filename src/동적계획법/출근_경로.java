@@ -13,6 +13,7 @@ package 동적계획법;
  * @link https://takjoon.takijk.xyz/problems/29528
  */
 public class 출근_경로 {
+	private int[][][][] memo;
 	public int solve(int w, int h) {
 
 		// 남북 방향 도로 w
@@ -21,14 +22,8 @@ public class 출근_경로 {
 		// 상근이는 교차로 (1, 1)에 살고 있고 교차로 (w, h)에 있는 회사에 다님.
 		// w, h가 목적지구나.
 
-		// TODO : 상근이가 회사에 출근할 수 있는 경로의 수
-		// 1. 상근이는 동쪽 또는 북쪽으로만 이동할 수 있다.
-		// 2. 교차로를 돈 차량은 그 다음 교차로에서 다시 방향을 바꿀 수 없다.
-		// i, j 에 있을 때 w, h 로 가는 경우의 수
-		// i, j 에 있을 때 직전에 교차로를 돌은건지 아닌지
-
-		// wᵢ, hᵢ 에서
-		return(move(2, 1, 0, false, h, w) + move(1, 2, 1, false, h, w)) % 100000 ;
+		memo = new int[w][h][2][2];
+		return (move(2, 1, 0, false, h, w) + move(1, 2, 1, false, h, w)) % 100000;
 	}
 
 	private int move(int x, int y, int dir, boolean justTurned, int destX, int destY) {
@@ -43,12 +38,14 @@ public class 출근_경로 {
 		boolean fromX = dir == 0;
 		boolean fromY = dir == 1;
 
+		if(memo[x][y][dir][justTurned ? 0 : 1] != 0) return memo[x][y][dir][justTurned ? 0 : 1];
+
 		//1. 동쪽으로 이동(x에서 y로 방향 전환했으면 이동 불가)
 		int aCase = justTurned && fromY ? 0 : move(x + 1, y, 0, fromY, destX, destY);
 		//2. 북쪽으로 이동(y에서 x로 변향전환 했으면 이동 불가)
 		int bCase = justTurned && fromX ? 0 : move( x, y + 1, 1, fromX, destX, destY);
 
-		return (aCase + bCase);
+		return memo[x][y][dir][justTurned ? 0 : 1] = (aCase + bCase) % 100000;
 	}
 
 	public static void main(String[] args) {

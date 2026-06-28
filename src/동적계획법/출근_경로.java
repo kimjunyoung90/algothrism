@@ -28,10 +28,10 @@ public class 출근_경로 {
 		// i, j 에 있을 때 직전에 교차로를 돌은건지 아닌지
 
 		// wᵢ, hᵢ 에서
-		return move(1, 1, 1, 1, 1, 1, h, w);
+		return move(1, 1, 1, false, h, w);
 	}
 
-	private int move(int prevPrevX, int prevPrevY, int prevX, int prevY, int x, int y, int destX, int destY) {
+	private int move(int x, int y, int dir, boolean justTurned, int destX, int destY) {
 
 		if(x > destX) return 0;
 		if(y > destY) return 0;
@@ -40,14 +40,13 @@ public class 출근_경로 {
 			return 1;
 		}
 
-		boolean intersection = x - prevPrevX == 1 && y - prevPrevY == 1;
-		boolean prevXMoved = y == prevY;
-		boolean prevYMoved = x == prevX;
+		boolean fromX = dir == 0;
+		boolean fromY = dir == 1;
 
 		//1. 동쪽으로 이동(x에서 y로 방향 전환했으면 이동 불가)
-		int aCase = intersection && prevYMoved ? 0 : move(prevX, prevY, x, y, x + 1, y, destX, destY);
+		int aCase = justTurned && fromY ? 0 : move(x + 1, y, 0, fromY, destX, destY);
 		//2. 북쪽으로 이동(y에서 x로 변향전환 했으면 이동 불가)
-		int bCase = intersection && prevXMoved ? 0 : move(prevX, prevY, x, y, x, y + 1, destX, destY);
+		int bCase = justTurned && fromX ? 0 : move( x, y + 1, 1, fromX, destX, destY);
 
 		return (aCase + bCase) % 100000;
 	}

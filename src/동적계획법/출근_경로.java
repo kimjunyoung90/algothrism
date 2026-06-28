@@ -31,24 +31,24 @@ public class 출근_경로 {
 		return move(1, 1, 1, 1, 1, 1, h, w);
 	}
 
-	private int move(int prevPrevX, int prevPrevY, int prevX, int prevY, int xPosition, int yPosition, int destX, int destY) {
+	private int move(int prevPrevX, int prevPrevY, int prevX, int prevY, int x, int y, int destX, int destY) {
 
-		if(xPosition > destX) return 0;
-		if(yPosition > destY) return 0;
+		if(x > destX) return 0;
+		if(y > destY) return 0;
 
-		if(xPosition == destX && yPosition == destY) {
+		if(x == destX && y == destY) {
 			return 1;
 		}
 
+		boolean intersection = x - prevPrevX == 1 && y - prevPrevY == 1;
+		boolean prevXMoved = y == prevY;
+		boolean prevYMoved = x == prevX;
+
 		//1. 동쪽으로 이동(x에서 y로 방향 전환했으면 이동 불가)
-		boolean intersection = xPosition - prevPrevX == 1 && yPosition - prevPrevY == 1;
-		boolean prevXMoved = yPosition == prevY;
-		boolean prevYMoved = xPosition == prevX;
-
-		int aCase = intersection && prevYMoved ? 0 : move(prevX, prevY, xPosition, yPosition, xPosition + 1, yPosition, destX, destY);
-
+		int aCase = intersection && prevYMoved ? 0 : move(prevX, prevY, x, y, x + 1, y, destX, destY);
 		//2. 북쪽으로 이동(y에서 x로 변향전환 했으면 이동 불가)
-		int bCase = intersection && prevXMoved ? 0 : move(prevX, prevY, xPosition, yPosition, xPosition, yPosition + 1, destX, destY);
+		int bCase = intersection && prevXMoved ? 0 : move(prevX, prevY, x, y, x, y + 1, destX, destY);
+
 		return (aCase + bCase) % 100000;
 	}
 

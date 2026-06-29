@@ -17,30 +17,26 @@ import java.util.stream.Collectors;
  */
 public class 팰린드롬_만들기 {
     public int solve(int[] nums) {
-        // TODO : 한 수열이 주어졌을 때 펠린드롭을 만들기 위해 넣어야 하는 최소 수의 개수
-        // 1, 2, 3, 4, 2
-        // 1, 2, 3, 4, 3, 2, 1
-        // i를 선택했을 때 맞은 편 위치에 같은 수가 있는가?
-        // 맞은 편 위치란? length - 1 - i
-        // 중앙 값이면 상관 없다.
-        List<Integer> numList = Arrays.stream(nums).boxed().collect(Collectors.toList());
-        int count = 0;
-        int idx = 0;
-        while(idx < numList.size() / 2) {
-            int left = numList.get(idx);
-            int rightIdx = numList.size() - 1 - idx;
-            int right = numList.get(rightIdx);
-            if(left != right) {
-                if(rightIdx == numList.size() - 1) {
-                    numList.add(left);
-                } else {
-                    numList.add(rightIdx, left);
-                }
-                count++;
-            }
-            idx++;
+        return count(nums, 0, nums.length - 1);
+    }
+
+    /**
+     * nums[i..j] 구간을 팰린드롬으로 만들기 위한 최소 삽입 횟수.
+     */
+    private int count(int[] nums, int i, int j) {
+        if (i >= j) {
+            return 0; // 구간이 비었거나 한 글자면 이미 팰린드롬
         }
-        return count;
+        // TODO(human): 점화식 작성
+        // - nums[i] == nums[j] 일 때: 양 끝은 맞으니 비용 없이 안쪽으로
+        // - nums[i] != nums[j] 일 때: 한쪽을 복제(+1)하고 안쪽으로, 두 경우 중 min
+        int left = i + 1;
+        int right = j;
+        if(nums[i] == nums[j]) {
+            right -= 1;
+        }
+
+        return count(nums, left, right);
     }
 
     public static void main(String[] args) {

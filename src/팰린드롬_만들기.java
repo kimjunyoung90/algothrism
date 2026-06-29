@@ -28,7 +28,7 @@ public class 팰린드롬_만들기 {
         if (i >= j) {
             return 0; // 구간이 비었거나 한 글자면 이미 팰린드롬
         }
-        // TODO(human): 점화식 작성
+
         if(nums[i] == nums[j]) {
             return count(nums, i + 1, j - 1);
         } else {

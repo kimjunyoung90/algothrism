@@ -32,7 +32,7 @@ public class 팰린드롬_만들기 {
         if(nums[i] == nums[j]) {
             return count(nums, i + 1, j - 1);
         } else {
-            return count(nums, i + 1, j) + 1;
+            return Math.min(count(nums, i + 1, j) + 1, count(nums, i, j - 1) + 1);
         }
     }
 

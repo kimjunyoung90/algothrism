@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -28,15 +29,11 @@ public class 팰린드롬_만들기 {
             return 0; // 구간이 비었거나 한 글자면 이미 팰린드롬
         }
         // TODO(human): 점화식 작성
-        // - nums[i] == nums[j] 일 때: 양 끝은 맞으니 비용 없이 안쪽으로
-        // - nums[i] != nums[j] 일 때: 한쪽을 복제(+1)하고 안쪽으로, 두 경우 중 min
-        int left = i + 1;
-        int right = j;
         if(nums[i] == nums[j]) {
-            right -= 1;
+            return count(nums, i + 1, j - 1);
+        } else {
+            return count(nums, i + 1, j) + 1;
         }
-
-        return count(nums, left, right);
     }
 
     public static void main(String[] args) {

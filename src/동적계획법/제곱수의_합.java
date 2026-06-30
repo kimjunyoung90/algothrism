@@ -27,7 +27,7 @@ public class 제곱수의_합 {
         for (int i = 1; i <= n; i++) {
             minSquareSum[i] = i;
         }
-        for (int i = 2; i <= n; i++) {
+        for (int i = 2; i * i <= n; i++) {
             //7이라는 값을 항의 제곱수의 합으로 표현하기 위해서
             //1^2 + 6을 만들 때 필요한 최소 항 수
             for (int j = i * i; j <= n; j++) {

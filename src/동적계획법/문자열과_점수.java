@@ -35,8 +35,8 @@ public class 문자열과_점수 {
         //
         int[][] dp = new int[x.length() + 1][y.length() + 1];
         //초기화
-        for (int j = 1; j <= y.length(); j++) dp[0][j] = b;
-        for (int i = 1; i <= x.length(); i++) dp[i][0] = b;
+        for (int i = 1; i <= x.length(); i++) dp[i][0] = i * b;
+        for (int j = 1; j <= y.length(); j++) dp[0][j] = j * b;
 
         for (int i = 1; i < dp.length; i++) {
             for (int j = 1; j < dp[i].length; j++) {
